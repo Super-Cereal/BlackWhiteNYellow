@@ -10,15 +10,15 @@ const StartScreen = (): JSX.Element => {
   return (
     <>
       <Header titleText={titleText} headerType={headerType} />
-      <div className="StartScreen">
+      <div className="StartScreen Page">
         <div className="StartScreen-Settings">
           <img
             src={configurationImage}
             alt="configuration"
-            className="StartScreen-SettingsImage"
+            className="StartScreen-Settings-Image"
           />
-          <p className="StartScreen-SettingsText">
-            Configure repository connection and synchronization settings
+          <p className="StartScreen-Settings-Text">
+            Configure repository connection<br />and synchronization settings
           </p>
           <button className="Button Button_bigger Button_color_yellow">
             Open settings

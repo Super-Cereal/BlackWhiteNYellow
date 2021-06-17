@@ -18,9 +18,9 @@ const Settings = (): JSX.Element => {
   return (
     <>
       <Header titleText={'School CI server'} headerType={'Settings'} />
-      <div className="Settings">
+      <div className="Settings Page">
         <div className="Settings-Titles">
-          <h2 className="Settings-Titles-MainTitle">Settings</h2>
+          <h2 className="Settings-Titles-MainTitle fontType_caption">Settings</h2>
           <h3 className="Settings-Titles-InfoTitle">Configure repository connection and synchronization settings.</h3>
         </div>
         <form onSubmit={handleSubmit} className="Settings-Form Form">

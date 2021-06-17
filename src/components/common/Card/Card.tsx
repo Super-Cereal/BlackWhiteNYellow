@@ -3,7 +3,6 @@ import React from 'react';
 import { CardProps } from '../types';
 
 const Card = ({
-  cardPerfomance,
   status,
   buildNumber,
   commitText,
@@ -12,24 +11,25 @@ const Card = ({
   commitAuthor,
   date,
   period,
+  isStatic = false,
 }: CardProps): JSX.Element => (
-  <div className={`Card Card_${status} Card_${cardPerfomance}`}>
-    <div className="Card-Data">
-      <div className="Card-Data-InfoBlock">
-        <div>
-          <div className="Card-Data-InfoBlock-BuildNumber">{`#${buildNumber}`}</div>
-          <div className="Card-Data-InfoBlock-CommitText">{commitText}</div>
-        </div>
-        <div>
-          <div className="Card-Data-InfoBlock-Branch">{commitBranch}</div>
-          <div className="Card-Data-InfoBlock-CommitHash">{commitShortHash}</div>
-          <div className="Card-Data-InfoBlock-AuthorName">{commitAuthor}</div>
-        </div>
+  <div className={`Card Card_${status} Card_static_${isStatic}`}>
+    <div>
+      <div className="Card-NumberNText">
+        <div className={`Card-BuildNumber Card-BuildNumber_${status} fontType_subhead`}>{'#' + buildNumber}</div>
+        <div className="Card-CommitText fontType_caption">{commitText}</div>
       </div>
-      <div className="Card-Data-DateBlock">
-        <div className="Card-Data-DateBlock-Date">{date}</div>
-        <div className="Card-Data-DateBlock-Period">{period}</div>
+      <div className="Card-CommitNAuthor">
+        <div className="Card-CommitInfo">
+          <div className="Card-CommitInfo-Branch">{commitBranch}</div>
+          <div className="Card-CommitInfo-CommitHash">{commitShortHash}</div>
+        </div>
+        <div className="Card-AuthorName">{commitAuthor}</div>
       </div>
+    </div>
+    <div className="Card-DateInfo">
+      <div className="Card-DateInfo-Date">{date}</div>
+      <div className="Card-DateInfo-Period">{period}</div>
     </div>
   </div>
 );

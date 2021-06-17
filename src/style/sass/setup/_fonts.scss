@@ -42,26 +42,13 @@
 body {
   background: $white;
 }
-.fontColor {
-  &_gray {
-    color: $gray;
-  }
-}
-
-.fontWeight {
-  &_700 {
-    font-weight: 700;
-  }
-  &_500 {
-    font-weight: 500;
-  }
-}
 
 .fontType {
   &_headline {
     font-weight: 500;
     font-size: 1.85rem;
     line-height: 2.3rem;
+    letter-spacing: 0.019rem;
   }
   &_subhead {
     font-weight: 500;

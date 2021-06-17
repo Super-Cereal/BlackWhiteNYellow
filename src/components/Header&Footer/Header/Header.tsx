@@ -6,7 +6,7 @@ const Header = ({ titleText, headerType }: HeaderProps): JSX.Element => {
   const ButtonsElems = createButtonsElems(headerType);
   return (
     <header className="Header">
-      <h1 className={`Header-Title Header-Title_${headerType}`}>{titleText}</h1>
+      <h1 className={`Header-Title Header-Title_${headerType} fontType_headline`}>{titleText}</h1>
       <div className="Header-Buttons">{ButtonsElems}</div>
     </header>
   );

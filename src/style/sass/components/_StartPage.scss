@@ -1,0 +1,19 @@
+.StartScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-Settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 248px;
+    &-Text {
+      display: block;
+      margin-top: 32px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+  }
+}

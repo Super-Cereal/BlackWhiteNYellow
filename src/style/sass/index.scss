@@ -1,1 +1,19 @@
-@import './setup', './components';
+.App {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.Page {
+  flex: 1 0;
+}
+
+.Page,
+.Header,
+.Footer {
+  padding: 0 100px;
+}
+
+@import './setup', './common', './components';

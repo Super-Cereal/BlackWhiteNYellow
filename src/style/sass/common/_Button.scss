@@ -1,0 +1,63 @@
+.Button {
+  box-sizing: border-box;
+  min-width: 28px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: $gray;
+  display: flex;
+  align-items: center;
+  transition: background-color 100ms;
+  &_bigger {
+    min-height: 36px;
+    padding: 2.5px 20px;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: $gray_hovered;
+  }
+  &:focus {
+    box-shadow: 0 0 0 2px $gray_border_focused;
+  }
+  &:disabled {
+    background-color: $gray_disabled;
+  }
+  &_withIcon {
+    &::before {
+      display: inline-block;
+      font-family: 'icomoon';
+    }
+    &_settings::before {
+      content: '\e905';
+    }
+    &_run::before {
+      content: '\e904';
+    }
+    &_rebuild::before {
+      content: '\e903';
+    }
+  }
+  &_color {
+    &_yellow {
+      background-color: $yellow;
+      &:hover {
+        background-color: $yellow_hovered;
+      }
+      &:focus {
+        box-shadow: 0 0 0 2px $yellow_border_focused;
+      }
+    }
+    &_white {
+      background-color: $white;
+      border: 1px solid $gray;
+      &:hover {
+        background-color: $gray;
+      }
+    }
+  }
+}
+
+.Button-Text {
+  display: inline-block;
+  margin-right: 5px;
+  margin-left: 5px;
+}

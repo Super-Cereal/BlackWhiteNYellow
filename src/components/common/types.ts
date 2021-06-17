@@ -1,5 +1,4 @@
 export type CardProps = {
-  cardPerfomance: 'leftToRight' | 'topToBottom';
   status: 'success' | 'failed' | 'waiting';
   buildNumber: string;
   commitText: string;
@@ -8,4 +7,5 @@ export type CardProps = {
   commitAuthor: string;
   date: string;
   period: string;
+  isStatic?: boolean;
 };

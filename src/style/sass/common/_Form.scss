@@ -1,0 +1,48 @@
+.Form {
+  &-InputBlock {
+    padding-top: 10px;
+    padding-bottom: 8px;
+    &-Input {
+      box-sizing: border-box;
+      border: 2px solid $gray_border;
+      border-radius: 4px;
+      padding: 10px 13px;
+      &:focus {
+        border-color: $gray_border_focused;
+      }
+      &::placeholder,
+      &::-webkit-input-placeholder {
+        color: $black;
+        opacity: 0.2;
+      }
+    }
+    &_number {
+      &-Label_value {
+        color: $blue_gray_dark;
+      }
+      &-Input {
+        display: inline-block;
+        width: 52px;
+        margin: 0 8px;
+        text-align: right;
+      }
+    }
+    &_text {
+      display: flex;
+      flex-direction: column;
+      &-Label {
+        width: fit-content;
+        margin-bottom: 6px;
+      }
+      &-Input {
+        width: 475px;
+      }
+    }
+  }
+  &-ButtonsBlock {
+    display: flex;
+    .Button:nth-child(n + 2) {
+      margin-left: 10px;
+    }
+  }
+}

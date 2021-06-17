@@ -1,0 +1,14 @@
+.Settings {
+  &-Titles {
+    &-MainTitle {
+      font-weight: 700;
+    }
+    &-InfoTitle {
+      margin-top: 8px;
+      color: $blue_gray;
+    }
+  }
+  &-Form {
+    padding: 12px 0;
+  }
+}

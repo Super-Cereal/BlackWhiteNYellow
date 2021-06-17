@@ -1,3 +1,19 @@
 .Header {
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 8px;
+  &-Title {
+    &_StartScreen,
+    &_Settings {
+      color: $blue_gray;
+    }
+  }
+  &-Buttons {
+    display: flex;
+    .Button:nth-child(n + 2) {
+      margin-left: 8px;
+    }
+  }
 }

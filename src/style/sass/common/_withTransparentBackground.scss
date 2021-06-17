@@ -1,0 +1,20 @@
+.withTransparentBackground {
+  &_component_true {
+    z-index: 101;
+  }
+  &_label {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: background-color 500ms;
+    visibility: hidden;
+    background-color: transparent;
+    z-index: 100;
+    &_true {
+      visibility: visible;
+      background-color: rgba(0, 0, 0, 0.55);
+    }
+  }
+}
