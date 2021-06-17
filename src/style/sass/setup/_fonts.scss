@@ -1,0 +1,75 @@
+@font-face {
+  font-family: 'YS Text';
+  src: local('Yandex Sans Text Thin'), local('YandexSansText-Thin'),
+    url('../../fonts/YandexSansText-Thin.woff2') format('woff2'),
+    url('../../fonts/YandexSansText-Thin.woff') format('woff');
+  font-weight: 100;
+}
+@font-face {
+  font-family: 'YS Text';
+  src: local('Yandex Sans Text Light'), local('YandexSansText-Light'),
+    url('../../fonts/YandexSansText-Light.woff2') format('woff2'),
+    url('../../fonts/YandexSansText-Light.woff') format('woff');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'YS Text';
+  src: local('Yandex Sans Text Regular'), local('YandexSansText-Regular'),
+    url('../../fonts/YandexSansText-Regular.woff2') format('woff2'),
+    url('../../fonts/YandexSansText-Regular.woff') format('woff');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'YS Text';
+  src: local('Yandex Sans Text Medium'), local('YandexSansText-Medium'),
+    url('../../fonts/YandexSansText-Medium.woff2') format('woff2'),
+    url('../../fonts/YandexSansText-Medium.woff') format('woff');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'YS Text';
+  src: local('Yandex Sans Text Bold'), local('YandexSansText-Bold'),
+    url('../../fonts/YandexSansText-Bold.woff2') format('woff2'),
+    url('../../fonts/YandexSansText-Bold.woff') format('woff');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'icomoon';
+  src: url('../../fonts/icomoon.woff2') format('woff2'),
+    url('../../fonts/icomoon.woff') format('woff');
+}
+
+body {
+  background: $white;
+}
+.fontColor {
+  &_gray {
+    color: $gray;
+  }
+}
+
+.fontWeight {
+  &_700 {
+    font-weight: 700;
+  }
+  &_500 {
+    font-weight: 500;
+  }
+}
+
+.fontType {
+  &_headline {
+    font-weight: 500;
+    font-size: 1.85rem;
+    line-height: 2.3rem;
+  }
+  &_subhead {
+    font-weight: 500;
+    font-size: 1.385rem;
+    line-height: 1.69rem;
+  }
+  &_caption {
+    font-size: 1.154rem;
+    line-height: 1.54rem;
+  }
+}

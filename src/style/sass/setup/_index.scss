@@ -1,0 +1,31 @@
+@import './mediaMixin', './colors', './fonts';
+
+html,
+body,
+div,
+form,
+input,
+label,
+h1,
+h2,
+h3,
+p,
+a,
+span,
+button {
+  margin: 0;
+  padding: 0;
+  font-family: 'YS Text', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 1.23em;
+  color: $black;
+}
+a {
+  text-decoration: none;
+}
+button {
+  outline: none;
+  border: none;
+}
