@@ -1,27 +1,27 @@
-$_screens: ("all", 660, 1000, 1360, 1900);
+$_screens: ('all', 660, 900, 1200, 1800);
 @mixin media($property, $values) {
   @for $i from 1 through length($values) {
     $value: nth($values, $i);
     $screen: nth($_screens, $i);
-    @if $screen == "all" {
+    @if $screen == 'all' {
       #{$property}: unquote(#{$value});
-    } @else {
-      @media screen and (min-width: $screen + "px") {
+    } @else if ($value != nth($values, $i - 1)) {
+      @media screen and (min-width: $screen + 'px') {
         #{$property}: unquote(#{$value});
       }
     }
   }
 }
 
-$_screensPortrait: ("all", 370, 410, 760);
+$_screensPortrait: ('all', 370, 410, 760);
 @mixin mediaPortrait($property, $values) {
   @for $i from 1 through length($values) {
     $value: nth($values, $i);
     $screen: nth($_screensPortrait, $i);
-    @if $screen == "all" {
+    @if $screen == 'all' {
       #{$property}: unquote(#{$value});
-    } @else {
-      @media (min-width: $screen + "px") {
+    } @else if ($value != nth($values, $i - 1)) {
+      @media (min-width: $screen + 'px') {
         #{$property}: unquote(#{$value});
       }
     }
