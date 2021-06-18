@@ -1,8 +1,8 @@
 .Card {
   position: relative;
-  display: flex;
+  display: grid;
   box-sizing: border-box;
-  padding: 12px 0 12px 56px;
+  padding: 12px 16px 12px 56px;
   box-shadow: 0px 0px 1px rgba(67, 68, 69, 0.3), 0px 1px 1px rgba(67, 68, 69, 0.3);
   border-radius: 6px;
   transition: box-shadow 260ms;
@@ -11,7 +11,7 @@
     display: block;
     font-family: 'icomoon';
     font-size: 1.6rem;
-    top: 13.5px;
+    top: 15px;
     left: 25px;
   }
   &_success {
@@ -33,16 +33,15 @@
     }
   }
   &_static_false {
-    justify-content: space-between;
+    @include media(grid-template-columns, ((7fr 2fr), (4fr 1fr), (17fr 3fr)));
     margin-bottom: 8px;
   }
   &_static_true {
-    flex-direction: column;
+    grid-template-rows: auto auto;
     margin-bottom: 12px;
   }
   &-DateInfo {
     display: flex;
-    width: 15%;
     &-Date::before {
       content: '\e907';
     }
@@ -76,12 +75,21 @@
   &:hover:not(&_static_true) {
     box-shadow: 0px 0px 1px rgba(67, 68, 69, 0.3), 0px 2px 8px rgba(67, 68, 69, 0.3);
   }
+  &-InfoWrapper {
+    min-width: 0;
+  }
   &-NumberNText,
   &-CommitNAuthor {
     display: flex;
   }
   &-NumberNText {
     margin-bottom: 10px;
+  }
+  &-CommitText {
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &-BuildNumber {
     margin-right: 4px;
@@ -124,6 +132,51 @@
     }
     &-CommitHash {
       opacity: 0.65;
+    }
+  }
+}
+
+@media (orientation: portrait) {
+  .Card {
+    padding: 16px 7px 16px 36px;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    &::before {
+      left: 12px;
+      top: 16px;
+      font-size: 1.3rem;
+    }
+    &-NumberNText,
+    &-CommitNAuthor {
+      display: grid;
+      grid-template-rows: auto auto;
+      row-gap: 8px;
+      margin-bottom: 8px;
+    }
+    &-CommitText {
+      width: 100%;
+      white-space: pre-wrap;
+      white-space: initial;
+      overflow: initial;
+    }
+    &-DateInfo {
+      position: relative;
+      flex-direction: row !important;
+      justify-content: left !important;
+      width: 100%;
+      margin-top: 17px;
+      &-Date {
+        margin-right: 10px;
+      }
+      &::before {
+        position: absolute;
+        top: -8px;
+        display: block;
+        content: '';
+        width: 100%;
+        height: 1px;
+        background-color: $blue_gray_light;
+      }
     }
   }
 }

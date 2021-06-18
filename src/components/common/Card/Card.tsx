@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CardProps } from '../types';
 
-const Card = ({
+const Card: React.FC<CardProps> = ({
   status,
   buildNumber,
   commitText,
@@ -12,9 +12,9 @@ const Card = ({
   date,
   period,
   isStatic = false,
-}: CardProps): JSX.Element => (
+}) => (
   <div className={`Card Card_${status} Card_static_${isStatic}`}>
-    <div>
+    <div className="Card-InfoWrapper">
       <div className="Card-NumberNText">
         <div className={`Card-BuildNumber Card-BuildNumber_${status} fontType_subhead`}>{'#' + buildNumber}</div>
         <div className="Card-CommitText fontType_caption">{commitText}</div>

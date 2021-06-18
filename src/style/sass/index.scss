@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  width: 100vw;
   min-height: 100vh;
 }
 
@@ -10,10 +9,20 @@
   flex: 1 0;
 }
 
+@import './setup';
+
 .Page,
 .Header,
 .Footer {
-  padding: 0 100px;
+  @include media(padding, ((0 40px), (0 60px), (0 100px)));
 }
 
-@import './setup', './common', './components';
+@media (orientation: portrait) {
+  .Page,
+  .Header,
+  .Footer {
+    @include mediaPortrait(padding, ((0 16px), (0 20px), (0 20px), (0 35px)));
+  }
+}
+
+@import './common', './components';

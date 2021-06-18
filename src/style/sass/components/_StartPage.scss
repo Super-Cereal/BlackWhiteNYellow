@@ -11,9 +11,24 @@
     width: 248px;
     &-Text {
       display: block;
-      margin-top: 32px;
-      margin-bottom: 24px;
+      @include media(margin-top, (20px, 24px, 32px));
+      @include media(margin-bottom, (16px, 20px, 24px));
       text-align: center;
+    }
+    &-Image {
+      @include media(width, (75px, 120px, 130px));
+      @include media(height, (75px, 120px, 130px));
+    }
+  }
+}
+
+@media (orientation: portrait) {
+  .StartScreen {
+    &-Settings {
+      &-Image {
+        width: 124px;
+        height: 124px;
+      }
     }
   }
 }

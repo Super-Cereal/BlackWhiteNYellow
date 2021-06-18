@@ -1,15 +1,15 @@
 .Button {
-  box-sizing: border-box;
-  min-width: 28px;
-  padding: 8px;
+  @include media(padding, ((7px 8px), (7px 8px), (7px 8px), (9px 11px)));
+  line-height: 1.1rem;
   border-radius: 4px;
   background-color: $gray;
   display: flex;
   align-items: center;
+  justify-content: center;
   transition: background-color 100ms;
   &_bigger {
-    min-height: 36px;
-    padding: 2.5px 20px;
+    @include media(min-height, (27px, 27px, 36px));
+    @include media(padding, ((8px 20px), (8px 20px), (2.5px 20px), (10px 30px), 10px 30px));
   }
   &:hover {
     cursor: pointer;
@@ -58,6 +58,19 @@
 
 .Button-Text {
   display: inline-block;
+  text-align: center;
   margin-right: 5px;
   margin-left: 5px;
+}
+
+@media (orientation: portrait) {
+  .Button {
+    @include mediaPortrait(padding, ((7px 8px), (9px 11px)));
+    &_bigger {
+      padding: 10.5px 20px;
+    }
+  }
+  .Button_onMobile_removeText .Button-Text {
+    display: none;
+  }
 }

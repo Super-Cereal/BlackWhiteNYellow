@@ -4,7 +4,7 @@ import FormTextField from '../FormFields/FormTextField/FormTextField';
 
 import useFormField from './../FormFields/useFormField';
 
-const NewBuildForm = (): JSX.Element => {
+const NewBuildForm: React.FC = () => {
   const commitHashField = useFormField();
 
   const handleSubmit = (e: React.FormEvent) => {

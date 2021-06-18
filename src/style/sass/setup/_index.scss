@@ -18,9 +18,9 @@ button {
   font-family: 'YS Text', sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 13px;
-  line-height: 1.23em;
+  line-height: 1.23rem;
   color: $black;
+  @include media(font-size, (10px, 13px, 13px, 14px, 16px));
 }
 a {
   text-decoration: none;
@@ -29,4 +29,22 @@ button,
 input {
   outline: none;
   border: none;
+}
+
+@media (orientation: portrait) {
+  html,
+  body,
+  div,
+  form,
+  input,
+  label,
+  h1,
+  h2,
+  h3,
+  p,
+  a,
+  span,
+  button {
+    font-size: 13px;
+  }
 }

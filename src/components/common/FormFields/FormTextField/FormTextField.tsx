@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FieldProps } from '../types';
 
-const FormTextField = ({ label, name, data, isRequired = false, placeholder = '' }: FieldProps): JSX.Element => {
+const FormTextField: React.FC<FieldProps> = ({ label, name, data, isRequired = false, placeholder = '' }) => {
   return (
     <div className="Form-InputBlock Form-InputBlock_text">
       <label

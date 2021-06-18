@@ -2,7 +2,7 @@ import React from 'react';
 
 import { HeaderProps } from '../types';
 
-const Header = ({ titleText, headerType }: HeaderProps): JSX.Element => {
+const Header: React.FC<HeaderProps> = ({ titleText, headerType }) => {
   const ButtonsElems = createButtonsElems(headerType);
   return (
     <header className="Header">

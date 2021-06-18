@@ -1,12 +1,16 @@
 .Form {
+  &-Inputs {
+    padding: 12px 0;
+    @include media(padding, ((10px 0), (12px 0)));
+  }
   &-InputBlock {
-    padding-top: 10px;
-    padding-bottom: 8px;
+    @include media(padding-top, ((7px, 9px)));
+    @include media(padding-bottom, ((5px, 7px)));
     &-Input {
       box-sizing: border-box;
       border: 2px solid $gray_border;
       border-radius: 4px;
-      padding: 10px 13px;
+      @include media(padding, ((5px 6px), (7px 8px), (8.5px 9.5px)));
       &:focus {
         border-color: $gray_border_focused;
       }
@@ -35,7 +39,7 @@
         margin-bottom: 6px;
       }
       &-Input {
-        width: 475px;
+        @include media(width, (350px, 400px, 475px));
       }
     }
   }
@@ -43,6 +47,31 @@
     display: flex;
     .Button:nth-child(n + 2) {
       margin-left: 10px;
+    }
+  }
+}
+
+@media (orientation: portrait) {
+  .Form {
+    &-Inputs {
+      padding: 4px 0;
+    }
+    &-InputBlock {
+      @include mediaPortrait(padding-top, ((9px, 12px)));
+      @include mediaPortrait(padding-bottom, ((8px, 10px)));
+      &-Input {
+        padding: 8.5px 9.5px;
+      }
+      &_text-Input {
+        width: auto;
+      }
+    }
+    &-ButtonsBlock {
+      flex-direction: column;
+      .Button:nth-child(n + 2) {
+        margin-left: 0;
+        margin-top: 12px;
+      }
     }
   }
 }

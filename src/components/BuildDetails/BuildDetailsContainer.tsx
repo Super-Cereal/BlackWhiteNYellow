@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+
 import BuildDetails from './BuildDetails';
 
-type BuildDetailsProps = {
-  buildId: string;
-};
+type BuildDetailsContainerProps = RouteComponentProps<{ buildId: string }>;
 
-const BuildDetailsContainer = ({ buildId }: BuildDetailsProps): JSX.Element => {
+const BuildDetailsContainer: React.FC<BuildDetailsContainerProps> = ({ match }) => {
+  const buildId = match.params.buildId;
+  console.log(buildId);
   const logsText = `Starting type checking and linting service...
     Using 1 worker with 2048MB memory limit
     Hash: d54ed20309f352b3bda76cbbb6d272ed6afde438bd7a265eb08db3624c32dfc883a8c379c67f4de6
@@ -68,4 +70,4 @@ const BuildDetailsContainer = ({ buildId }: BuildDetailsProps): JSX.Element => {
   return <BuildDetails logsText={logsText} authorName={authorName} repoName={repoName} />;
 };
 
-export default BuildDetailsContainer;
+export default withRouter(BuildDetailsContainer);

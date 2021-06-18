@@ -35,8 +35,7 @@
 }
 @font-face {
   font-family: 'icomoon';
-  src: url('../../fonts/icomoon.woff2') format('woff2'),
-    url('../../fonts/icomoon.woff') format('woff');
+  src: url('../../fonts/icomoon.woff2') format('woff2'), url('../../fonts/icomoon.woff') format('woff');
 }
 
 body {
@@ -58,5 +57,18 @@ body {
   &_caption {
     font-size: 1.154rem;
     line-height: 1.54rem;
+  }
+}
+
+@media (orientation: portrait) {
+  .fontType {
+    &_headline {
+      font-size: 1.385rem;
+      line-height: 1.69rem;
+    }
+    &_subhead {
+      font-size: 1.23rem;
+      line-height: 1.23rem;
+    }
   }
 }

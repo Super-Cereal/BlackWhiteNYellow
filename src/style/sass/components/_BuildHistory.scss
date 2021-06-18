@@ -1,1 +1,8 @@
-.BuildHistory {}
+@media (orientation: portrait) {
+  .BuildHistory {
+    &-Button {
+      width: 100%;
+      padding: 10.5px;
+    }
+  }
+}

@@ -9,10 +9,9 @@ type BuildProps = {
   authorName: string;
 };
 
-const BuildDetails = ({ logsText, authorName, repoName }: BuildProps): JSX.Element => {
+const BuildDetails: React.FC<BuildProps> = ({ logsText, authorName, repoName }) => {
   const titleText = `${authorName}/${repoName}`;
   const headerType = 'BuildDetails';
-  // logsText = logsText.replaceAll(' ', '&nbsp;');
   return (
     <>
       <Header titleText={titleText} headerType={headerType} />

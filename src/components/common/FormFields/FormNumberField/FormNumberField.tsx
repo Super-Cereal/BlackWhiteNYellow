@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FieldProps } from '../types';
 
-const FormNumberField = ({ label, name, data, value = '' }: FieldProps): JSX.Element => {
+const FormNumberField: React.FC<FieldProps> = ({ label, name, data, value = '' }) => {
   return (
     <div className="Form-InputBlock Form-InputBlock_number">
       <label

@@ -1,17 +1,20 @@
 .Header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  @include media(padding-top, (10px, 10px, 10px, 14px, 14px));
+  @include media(padding-bottom, (10px, 10px, 10px, 14px, 14px));
   margin-bottom: 8px;
   &-Title {
+    word-break: break-all;
     &_StartScreen,
     &_Settings {
       color: $blue_gray;
     }
   }
   &-Buttons {
+    align-self: start;
     display: flex;
+    margin-left: 10px;
     .Button:nth-child(n + 2) {
       margin-left: 8px;
     }
