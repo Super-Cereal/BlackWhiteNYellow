@@ -14,7 +14,7 @@
 .Page,
 .Header,
 .Footer {
-  @include media(padding, ((0 40px), (0 60px), (0 100px)));
+  @include media(padding, ((0 40px), (0 60px), (0 100px), (0 150px), (0 280px)));
 }
 
 @media (orientation: portrait) {

@@ -17,7 +17,8 @@ const FormNumberField: React.FC<FieldProps> = ({ label, name, data, value = '' }
         value={data.value}
         onChange={data.onChange}
         className="Form-InputBlock-Input Form-InputBlock_number-Input"
-        type="text"
+        max="999"
+        type="number"
       />
       <label className="Form-InputBlock-Label Form-InputBlock_number-Label_value" htmlFor={name}>
         {value}

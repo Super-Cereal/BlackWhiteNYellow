@@ -1,15 +1,18 @@
 import React from 'react';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import BuildDetails from './BuildDetails';
+import { buildDetailsContainerProps, getBuildDetailsProps } from './types';
 
-type BuildDetailsContainerProps = RouteComponentProps<{ buildId: string }>;
+import Convert from 'ansi-to-html';
+const convert = new Convert();
 
-const BuildDetailsContainer: React.FC<BuildDetailsContainerProps> = ({ match }) => {
-  const buildId = match.params.buildId;
-  console.log(buildId);
-  const logsText = `Starting type checking and linting service...
+const getBuildDetails: getBuildDetailsProps = (buildId) => {
+  // ...
+  return {
+    authorName: 'MaName',
+    repoName: 'MaRepoName',
+    logsText: `Starting type checking and linting service...
     Using 1 worker with 2048MB memory limit
     Hash: d54ed20309f352b3bda76cbbb6d272ed6afde438bd7a265eb08db3624c32dfc883a8c379c67f4de6
     Version: webpack 4.41.6
@@ -64,10 +67,15 @@ const BuildDetailsContainer: React.FC<BuildDetailsContainerProps> = ({ match }) 
         [./src/account/reducers/serverError.ts] 526 bytes {main} [built]
         [./src/account/server.tsx] 1.62 KiB {main} [built]
         [./src/account/store.ts] 1.05 KiB {main} [built]
-            + 1484 hidden modules`;
-  const authorName = 'MaName';
-  const repoName = 'MaRepoName';
-  return <BuildDetails logsText={logsText} authorName={authorName} repoName={repoName} />;
+            + 1484 hidden modules`,
+  };
+};
+
+const BuildDetailsContainer: React.FC<buildDetailsContainerProps> = ({ match }) => {
+  const data = getBuildDetails(match.params.buildId);
+  const logsText = convert.toHtml(data.logsText);
+  // logsText = convert.toHtml("\u001b[38;5;196mHello\u001b[39m \u001b[48;5;226mWorld\u001b[49m");
+  return <BuildDetails logsText={logsText} authorName={data.authorName} repoName={data.repoName} />;
 };
 
 export default withRouter(BuildDetailsContainer);

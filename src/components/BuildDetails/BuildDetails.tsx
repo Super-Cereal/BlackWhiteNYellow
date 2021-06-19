@@ -12,9 +12,17 @@ type BuildProps = {
 const BuildDetails: React.FC<BuildProps> = ({ logsText, authorName, repoName }) => {
   const titleText = `${authorName}/${repoName}`;
   const headerType = 'BuildDetails';
+  const buttons = (
+    <>
+      <button className="Button Button_withIcon Button_withIcon_rebuild Button_onMobile_removeText">
+        <span className="Button-Text">Rebuild</span>
+      </button>
+      <button className="Button Button_withIcon Button_withIcon_settings"></button>
+    </>
+  );
   return (
     <>
-      <Header titleText={titleText} headerType={headerType} />
+      <Header titleText={titleText} headerType={headerType} buttons={buttons} />
       <div className="BuildDetails Page">
         <Card
           isStatic={true}
@@ -28,7 +36,7 @@ const BuildDetails: React.FC<BuildProps> = ({ logsText, authorName, repoName }) 
           period="1 ч 20 мин"
         />
         <div className="BuildDetails-Logs">
-          <pre>{logsText}</pre>
+          <pre dangerouslySetInnerHTML={{ __html: logsText }}></pre>
         </div>
       </div>
     </>

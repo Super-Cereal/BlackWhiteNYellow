@@ -105,9 +105,17 @@ const BuildHistory: React.FC = () => {
       key="9"
     />,
   ];
+  const buttons = (
+    <>
+      <button className="Button Button_withIcon Button_withIcon_run Button_onMobile_removeText">
+        <span className="Button-Text">Run Build</span>
+      </button>
+      <button className="Button Button_withIcon Button_withIcon_settings"></button>
+    </>
+  );
   return (
     <>
-      <Header titleText={'Ma_Name/Repository_Name'} headerType={'BuildHistory'} />
+      <Header titleText={'Ma_Name/Repository_Name'} headerType={'BuildHistory'} buttons={buttons} />
       <div className="BuildHistory Page">
         <div className="BuildHistory-Cards">{cards}</div>
         <button className="BuildHistory-Button Button Button_onMobile_wider">
