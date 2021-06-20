@@ -1,11 +1,11 @@
 import React from 'react';
 
-type withTransparentBackgroundType = (Component: any) => React.FC<any>;
+import { withTransparentBackgroundType } from './types';
+
+import usePopUpToggler from './usePopUpToggler';
 
 const withTransparentBackground: withTransparentBackgroundType = (Component) => () => {
-  const [popUp, setPopUp] = React.useState<boolean>(false);
-  const togglePopUp: React.MouseEventHandler<HTMLElement> = () =>
-    setPopUp(popUp ? false : true);
+  const [popUp, togglePopUp] = usePopUpToggler(false)
   return (
     <>
       <Component
