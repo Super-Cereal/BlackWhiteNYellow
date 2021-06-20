@@ -1,14 +1,18 @@
 .withTransparentBackground {
+  &_component {
+    display: none;
+  }
   &_component_true {
+    display: block;
     z-index: 101;
   }
-  &_label {
+  &_span {
     width: 100vw;
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    transition: background-color 0.5s ease-out;
+    transition: background-color 0.08s ease-out;
     visibility: hidden;
     background-color: transparent;
     z-index: 100;

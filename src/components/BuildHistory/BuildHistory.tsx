@@ -3,7 +3,15 @@ import React from 'react';
 import Header from '../Header&Footer/Header/Header';
 import Card from '../common/Card/Card';
 
-const BuildHistory: React.FC = () => {
+import { buildHistoryProps } from './types';
+
+import useFormField from '../common/FormFields/useFormField';
+import FormTextField from '../common/FormFields/FormTextField/FormTextField';
+
+const BuildHistory: React.FC<buildHistoryProps> = ({
+  popUpAdditionalClass,
+  togglePopUp,
+}) => {
   const cards = [
     <Card
       status="success"
@@ -107,7 +115,10 @@ const BuildHistory: React.FC = () => {
   ];
   const buttons = (
     <>
-      <button className="Button Button_withIcon Button_withIcon_run Button_onMobile_removeText">
+      <button
+        onClick={togglePopUp}
+        className="Button Button_withIcon Button_withIcon_run Button_onMobile_removeText"
+      >
         <span className="Button-Text">Run Build</span>
       </button>
       <button className="Button Button_withIcon Button_withIcon_settings"></button>
@@ -115,7 +126,12 @@ const BuildHistory: React.FC = () => {
   );
   return (
     <>
-      <Header titleText={'Ma_Name/Repository_Name'} headerType={'BuildHistory'} buttons={buttons} />
+      <PopUpBox popUpAdditionalClass={popUpAdditionalClass} togglePopUp={togglePopUp} />
+      <Header
+        titleText={'Ma_Name/Repository_Name'}
+        headerType={'BuildHistory'}
+        buttons={buttons}
+      />
       <div className="BuildHistory Page">
         <div className="BuildHistory-Cards">{cards}</div>
         <button className="BuildHistory-Button Button Button_onMobile_wider">
@@ -123,6 +139,49 @@ const BuildHistory: React.FC = () => {
         </button>
       </div>
     </>
+  );
+};
+
+const PopUpBox: React.FC<buildHistoryProps> = ({ popUpAdditionalClass, togglePopUp }) => {
+  const commitHashField = useFormField('');
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+  return (
+    <div className={`PopUpBox ${popUpAdditionalClass}`}>
+      <div className="PopUpBox-Titles">
+        <h2 className="PopUpBox-Titles-MainTitle fontType_subhead">New build</h2>
+        <h3 className="PopUpBox-Titles-InfoTitle">
+          Enter&nbsp;the&nbsp;commit&nbsp;hash
+          which&nbsp;you&nbsp;want&nbsp;to&nbsp;build.
+        </h3>
+      </div>
+      <form onSubmit={handleSubmit} className="PopUpBox-Form Form">
+        <div className="PopUpBox-Form-Inputs Form-Inputs">
+          <FormTextField
+            data={commitHashField}
+            name="repoName"
+            label=""
+            placeholder="Commit hash"
+            isRequired={true}
+          />
+        </div>
+        <div className="Form-ButtonsBlock">
+          <button
+            type="submit"
+            className="Button Button_bigger Button_color_yellow Button_onMobile_wider"
+          >
+            Run build
+          </button>
+          <button
+            onClick={togglePopUp}
+            className="Button Button_bigger Button_onMobile_wider"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
