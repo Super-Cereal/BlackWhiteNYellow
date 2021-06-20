@@ -7,13 +7,19 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.1s ease-out;
+  cursor: pointer;
   &_bigger {
     @include media(min-height, (27px, 27px, 36px));
-    @include media(padding, ((8px 20px), (8px 20px), (2.5px 20px), (10px 30px), 10px 30px));
+    @include media(
+      padding,
+      ((8px 20px), (8px 20px), (2.5px 20px), (10px 30px), 10px 30px)
+    );
   }
   &:hover {
-    cursor: pointer;
     background-color: $gray_hovered;
+  }
+  @media (pointer: coarse) {
+    background-color: $gray !important;
   }
   &:focus {
     box-shadow: 0 0 0 2px $gray_border_focused;
@@ -42,15 +48,11 @@
       &:hover {
         background-color: $yellow_hovered;
       }
+      @media (pointer: coarse) {
+        background-color: $yellow !important;
+      }
       &:focus {
         box-shadow: 0 0 0 2px $yellow_border_focused;
-      }
-    }
-    &_white {
-      background-color: $white;
-      border: 1px solid $gray;
-      &:hover {
-        background-color: $gray;
       }
     }
   }

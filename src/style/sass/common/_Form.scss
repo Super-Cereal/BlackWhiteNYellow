@@ -64,6 +64,9 @@
         &:hover {
           opacity: 0.8;
         }
+        @media (pointer: coarse) {
+          opacity: 0.2 !important;
+        }
       }
     }
   }
