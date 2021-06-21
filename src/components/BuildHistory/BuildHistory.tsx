@@ -165,7 +165,6 @@ const PopUpBox: React.FC<buildHistoryProps> = ({ popUpAdditionalClass, togglePop
           <FormTextField
             register={register}
             name="commitHash"
-            label=""
             placeholder="Commit hash"
             validators={{ required: 'This field is required' }}
             setValue={setValue}

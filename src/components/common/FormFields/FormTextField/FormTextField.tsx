@@ -16,14 +16,16 @@ const FormTextField: React.FC<FieldProps> = ({
   };
   return (
     <div className="Form-InputBlock Form-InputBlock_text">
-      <label
-        htmlFor={name}
-        className={`Form-InputBlock-Label Form-InputBlock_text-Label ${
-          validators.required && 'Form-InputBlock-Label_required'
-        }`}
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={name}
+          className={`Form-InputBlock-Label Form-InputBlock_text-Label ${
+            validators.required && 'Form-InputBlock-Label_required'
+          }`}
+        >
+          {label}
+        </label>
+      )}
       <div className="Form-InputBlock_text-InputBox">
         <input
           className={`Form-InputBlock-Input Form-InputBlock_text-Input ${
