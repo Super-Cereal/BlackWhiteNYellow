@@ -8,11 +8,17 @@ import BuildDetailsContainer from './components/BuildDetails/BuildDetailsContain
 
 import Footer from './components/Header&Footer/Footer/Footer';
 
+const settingsInitialized = false;
+
 const App: React.FC = () => (
   <div className="App">
     <BrowserRouter>
       <Route path="/" render={() => <StartScreen />} exact />
-      <Route path="/settings" render={() => <Settings />} exact />
+      <Route
+        path="/settings"
+        render={() => (settingsInitialized ? <BuildHistoryContainer /> : <Settings />)}
+        exact
+      />
       <Route path="/buildHistory" render={() => <BuildHistoryContainer />} exact />
       <Route path="/build/:buildId" render={() => <BuildDetailsContainer />} exact />
     </BrowserRouter>
