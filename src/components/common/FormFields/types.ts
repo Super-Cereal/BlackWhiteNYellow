@@ -1,3 +1,5 @@
+import { FieldError } from 'react-hook-form';
+
 type fieldValue = string | number;
 
 export interface useFormFieldInterface {
@@ -10,12 +12,15 @@ export interface useFormFieldInterface {
 export type FieldProps = {
   label: string;
   name: string;
-  data: {
-    value: fieldValue;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    setValue: (value: fieldValue) => void;
+  register: Function;
+  validators?: {
+    required?: boolean | string;
+    pattern?: RegExp | Object;
+    min?: Number | Object;
+    max?: Number | Object;
   };
-  isRequired?: boolean;
-  placeholder?: string;
+  errors?: FieldError | undefined;
   value?: string;
+  setValue: Function;
+  placeholder?: string;
 };

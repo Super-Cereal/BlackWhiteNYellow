@@ -2,37 +2,43 @@ import React from 'react';
 
 import { FieldProps } from '../types';
 
-const FormTextField: React.FC<FieldProps> = ({ label, name, data, isRequired = false, placeholder = '' }) => {
-  const inputRef = React.createRef<HTMLInputElement>();
+const FormTextField: React.FC<FieldProps> = ({
+  label,
+  name,
+  register,
+  validators = {},
+  errors,
+  placeholder = '',
+  setValue,
+}) => {
+  const onClickHandler = () => {
+    setValue(name, '', { shouldValidate: true });
+  };
   return (
     <div className="Form-InputBlock Form-InputBlock_text">
       <label
         htmlFor={name}
-        className={`Form-InputBlock-Label Form-InputBlock_text-Label ${isRequired && 'Form-InputBlock-Label_required'}`}
+        className={`Form-InputBlock-Label Form-InputBlock_text-Label ${
+          validators.required && 'Form-InputBlock-Label_required'
+        }`}
       >
         {label}
       </label>
       <div className="Form-InputBlock_text-InputBox">
         <input
-          className="Form-InputBlock-Input Form-InputBlock_text-Input"
-          name={name}
+          className={`Form-InputBlock-Input Form-InputBlock_text-Input ${
+            errors && 'Form-InputBlock-Input_withError'
+          }`}
           id={name}
-          value={data.value}
-          onChange={data.onChange}
+          {...register(name, validators)}
           placeholder={placeholder}
           type="text"
-          ref={inputRef}
         />
-        <span
-          className="Form-InputBlock_text-CancelInput"
-          onClick={() => {
-            data.setValue('');
-            inputRef.current?.focus();
-          }}
-        >
+        <span className="Form-InputBlock_text-CancelInput" onClick={onClickHandler}>
           &#xe90a;
         </span>
       </div>
+      {errors && <span className="Form-InputBlock-Error">{errors.message}</span>}
     </div>
   );
 };

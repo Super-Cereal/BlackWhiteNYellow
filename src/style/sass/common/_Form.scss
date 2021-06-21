@@ -20,6 +20,26 @@
         color: $black;
         opacity: 0.2;
       }
+      &_withError {
+        border-color: $red;
+        &:focus {
+          border-color: $red;
+        }
+      }
+    }
+    &-Error {
+      display: inline-block;
+      margin-top: 4px;
+      color: $red;
+    }
+    &-Label {
+      &_required {
+        &::after {
+          display: inline;
+          content: " *";
+          color: $red;
+        }
+      }
     }
     &_number {
       &-Label_value {

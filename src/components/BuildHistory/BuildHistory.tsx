@@ -5,8 +5,9 @@ import Card from '../common/Card/Card';
 
 import { buildHistoryProps } from './types';
 
-import useFormField from '../common/FormFields/useFormField';
 import FormTextField from '../common/FormFields/FormTextField/FormTextField';
+
+import { useForm } from 'react-hook-form';
 
 const BuildHistory: React.FC<buildHistoryProps> = ({
   popUpAdditionalClass,
@@ -143,10 +144,13 @@ const BuildHistory: React.FC<buildHistoryProps> = ({
 };
 
 const PopUpBox: React.FC<buildHistoryProps> = ({ popUpAdditionalClass, togglePopUp }) => {
-  const commitHashField = useFormField('');
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  type FormData = {
+    commitHash: string;
   };
+  const { register, handleSubmit, formState, setValue } = useForm<FormData>();
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
   return (
     <div className={`PopUpBox ${popUpAdditionalClass}`}>
       <div className="PopUpBox-Titles">
@@ -156,14 +160,16 @@ const PopUpBox: React.FC<buildHistoryProps> = ({ popUpAdditionalClass, togglePop
           which&nbsp;you&nbsp;want&nbsp;to&nbsp;build.
         </h3>
       </div>
-      <form onSubmit={handleSubmit} className="PopUpBox-Form Form">
+      <form onSubmit={onSubmit} className="PopUpBox-Form Form">
         <div className="PopUpBox-Form-Inputs Form-Inputs">
           <FormTextField
-            data={commitHashField}
-            name="repoName"
+            register={register}
+            name="commitHash"
             label=""
             placeholder="Commit hash"
-            isRequired={true}
+            validators={{ required: 'This field is required' }}
+            setValue={setValue}
+            errors={formState.errors.commitHash}
           />
         </div>
         <div className="Form-ButtonsBlock">
