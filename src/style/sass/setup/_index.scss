@@ -23,6 +23,7 @@ button {
   @include media(font-size, (10px, 13px, 13px, 14px, 16px));
 }
 a {
+  box-sizing: border-box;
   text-decoration: none;
 }
 button,

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Header from '../Header&Footer/Header/Header';
 import Card from './../common/Card/Card';
@@ -17,7 +18,10 @@ const BuildDetails: React.FC<BuildProps> = ({ logsText, authorName, repoName }) 
       <button className="Button Button_withIcon Button_withIcon_rebuild Button_onMobile_removeText">
         <span className="Button-Text">Rebuild</span>
       </button>
-      <button className="Button Button_withIcon Button_withIcon_settings"></button>
+      <Link
+        to="/settings"
+        className="Button Button_withIcon Button_withIcon_settings"
+      ></Link>
     </>
   );
   return (

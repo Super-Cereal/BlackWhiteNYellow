@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 import Header from '../Header&Footer/Header/Header';
 import Card from '../common/Card/Card';
@@ -120,7 +121,10 @@ const BuildHistory: React.FC<buildHistoryProps> = ({
       >
         <span className="Button-Text">Run Build</span>
       </button>
-      <button className="Button Button_withIcon Button_withIcon_settings"></button>
+      <Link
+        to="settings"
+        className="Button Button_withIcon Button_withIcon_settings"
+      ></Link>
     </>
   );
   return (
