@@ -1,13 +1,11 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 import Header from '../Header&Footer/Header/Header';
 import Card from '../common/Card/Card';
-
-import { buildHistoryProps } from './types';
-
 import FormTextField from '../common/FormFields/FormTextField/FormTextField';
 
-import { useForm } from 'react-hook-form';
+import { buildHistoryProps } from './types';
 
 const BuildHistory: React.FC<buildHistoryProps> = ({
   popUpAdditionalClass,
@@ -147,7 +145,9 @@ const PopUpBox: React.FC<buildHistoryProps> = ({ popUpAdditionalClass, togglePop
   type FormData = {
     commitHash: string;
   };
-  const { register, handleSubmit, formState, setValue } = useForm<FormData>();
+  const { register, handleSubmit, formState, setValue } = useForm<FormData>({
+    mode: 'onTouched',
+  });
   const onSubmit = handleSubmit((data) => {
     console.log(data);
   });
