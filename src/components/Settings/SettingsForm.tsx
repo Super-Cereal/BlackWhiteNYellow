@@ -5,16 +5,17 @@ import { connect } from 'react-redux';
 
 import FormTextField from '../common/FormFields/FormTextField/FormTextField';
 import FormNumberField from '../common/FormFields/FormNumberField/FormNumberField';
-import { SettingsFormProps, FormData } from './types';
+import { settingsFormProps, formData } from './types';
 
 // @ts-ignore
 import settingsDAL from '../../redux/settings/settingsDAL';
-
 // @ts-ignore
 // prettier-ignore
 import { axiosPostSettings } from '../../redux/settings/settingsActions';
+// @ts-ignore
+import { settingsRepoInfoSS } from '../../redux/storeSelectors';
 
-const SettingsForm: React.FC<SettingsFormProps> = ({
+const SettingsForm: React.FC<settingsFormProps> = ({
   register,
   onSubmit,
   onClickRedirect,
@@ -84,7 +85,11 @@ const SettingsForm: React.FC<SettingsFormProps> = ({
         value="minutes"
       />
     </div>
-    <div className="Form-ButtonsBlock">
+    <div
+      className={`Form-ButtonsBlock ${
+        isRequestInProgress && 'Form-ButtonsBlock_disabled'
+      }`}
+    >
       <button
         type="submit"
         className="Button Button_bigger Button_color_yellow Button_onMobile_wider"
@@ -100,17 +105,39 @@ const SettingsForm: React.FC<SettingsFormProps> = ({
       >
         Cancel
       </button>
+      {isRequestInProgress && (
+        <div className="Loader">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )}
     </div>
   </form>
 );
 
 type connectedStore = {
   axiosPostSettings: any;
+  repoInfo: {
+    repoName: string;
+    mainBranch: string;
+    buildCommand: string;
+    period: number;
+  };
 };
-const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings }) => {
-  const { register, handleSubmit, setError, formState, setValue } = useForm<FormData>({
+const SettingsFormContainer: React.FC<connectedStore> = ({
+  axiosPostSettings,
+  repoInfo,
+}) => {
+  const { register, handleSubmit, setError, formState, setValue } = useForm<formData>({
     mode: 'onTouched',
-    defaultValues: { period: 10, mainBranch: 'master' },
+    defaultValues: {
+      period: repoInfo.period || 10,
+      mainBranch: repoInfo.mainBranch || 'master',
+      buildCommand: repoInfo.buildCommand || undefined,
+      repoName: repoInfo.repoName || undefined,
+    },
   });
   const branchName = /^([\w-.]+)$/;
   const repoName = /^([\w-.]+)(\/)([\w-]+)$/;
@@ -161,4 +188,8 @@ const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings }) 
   );
 };
 
-export default connect(null, { axiosPostSettings })(SettingsFormContainer);
+// @ts-ignore
+const mstp = (state) => ({
+  repoInfo: settingsRepoInfoSS(state),
+});
+export default connect(mstp, { axiosPostSettings })(SettingsFormContainer);

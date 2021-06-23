@@ -1,4 +1,4 @@
-import settingsDAL from './settingsDAL';
+import settingsDAL from './buildHistoryDAL';
 
 export const SET_SETTINGS = 'SET_SETTINGS';
 
