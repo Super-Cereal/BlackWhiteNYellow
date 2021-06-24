@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import FormTextField from '../common/FormFields/FormTextField/FormTextField';
 import FormNumberField from '../common/FormFields/FormNumberField/FormNumberField';
+import Loader from '../common/Loader/Loader';
 import { settingsFormProps, formData } from './types';
 
 // @ts-ignore
@@ -105,14 +106,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
       >
         Cancel
       </button>
-      {isRequestInProgress && (
-        <div className="Loader">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      )}
+      {isRequestInProgress && <Loader />}
     </div>
   </form>
 );

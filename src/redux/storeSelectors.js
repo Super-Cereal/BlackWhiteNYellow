@@ -12,3 +12,5 @@ export const settingsRepoInfoSS = (state) => {
     buildCommand: set.buildCommand,
   };
 };
+
+export const buildHistoryBuildsSS = (state) => state.buildHistory.builds;

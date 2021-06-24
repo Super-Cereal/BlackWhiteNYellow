@@ -1,20 +1,16 @@
-import { SET_SETTINGS } from './buildHistoryActions';
+import { SET_BUILDS } from './buildHistoryActions';
 
 const defaultState = {
-  haveSettings: false,
-  repoName: null,
-  buildCommand: null,
-  mainBranch: null,
-  period: null,
+  builds: [],
 };
 
-const settingsReducer = (state = defaultState, action) => {
+const buildHistoryReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case SET_SETTINGS:
-      return { ...state, ...action.payload.data };
+    case SET_BUILDS:
+      return { ...state, builds: action.payload.builds };
     default:
       return state;
   }
 };
 
-export default settingsReducer;
+export default buildHistoryReducer;

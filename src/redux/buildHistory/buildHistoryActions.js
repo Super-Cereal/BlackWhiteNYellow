@@ -1,28 +1,21 @@
-import settingsDAL from './buildHistoryDAL';
+import buildHistoryDAL from './buildHistoryDAL';
 
-export const SET_SETTINGS = 'SET_SETTINGS';
+export const SET_BUILDS = 'SET_BUILDS';
 
-const setSettings = ({ repoName, buildCommand, mainBranch, period }) => ({
-  type: SET_SETTINGS,
-  payload: { data: { repoName, buildCommand, mainBranch, period, haveSettings: true } },
+const setBuilds = (builds) => ({
+  type: SET_BUILDS,
+  payload: { builds },
 });
 
-export const axiosGetSettings = () => async (dispatch) => {
-  const settings = await settingsDAL.axiosGetSettings();
-  if (settings.haveSettings) {
-    const rN = settings.data.repoName.split('/');
-    settings.data.repoName = rN[rN.length - 2] + '/' + rN[rN.length - 1];
-    await dispatch(setSettings(settings.data));
+export const axiosGetAllBuilds = (params) => async (dispatch) => {
+  const { offset, limit } = params ?? {};
+  const builds = await buildHistoryDAL.axiosGetAllBuilds({ offset, limit });
+  if (builds.status === 200) {
+    dispatch(setBuilds(builds.data));
   }
 };
 
-export const axiosPostSettings = (data) => async (dispatch) => {
-  const response = await settingsDAL.axiosPostSettings({
-    ...data,
-    repoName: `https://github.com/${data.repoName}`,
-  });
-  debugger;
-  if (response.status === 200) {
-    await dispatch(setSettings(data));
-  }
+export const axiosStartNewBuild = (commitHash) => async (dispatch) => {
+  const response = await buildHistoryDAL.axiosStartNewBuild(commitHash);
+  return response;
 };
