@@ -6,16 +6,17 @@ import Card from './../common/Card/Card';
 
 import { buildProps } from './types';
 
-const BuildDetails: React.FC<buildProps> = ({ logsText, repoName, build }) => {
+const BuildDetails: React.FC<buildProps> = ({ logsText, repoName, build, onRebuild, isRequestInProgress }) => {
   const buttons = (
     <>
-      <button className="Button Button_withIcon Button_withIcon_rebuild Button_onMobile_removeText">
+      <button
+        disabled={isRequestInProgress}
+        onClick={onRebuild}
+        className="Button Button_withIcon Button_withIcon_rebuild Button_onMobile_removeText"
+      >
         <span className="Button-Text">Rebuild</span>
       </button>
-      <Link
-        to="/settings"
-        className="Button Button_withIcon Button_withIcon_settings"
-      ></Link>
+      <Link to="/settings" className="Button Button_withIcon Button_withIcon_settings"></Link>
     </>
   );
   return (

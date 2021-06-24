@@ -86,11 +86,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
         value="minutes"
       />
     </div>
-    <div
-      className={`Form-ButtonsBlock ${
-        isRequestInProgress && 'Form-ButtonsBlock_disabled'
-      }`}
-    >
+    <div className={`Form-ButtonsBlock ${isRequestInProgress && 'Form-ButtonsBlock_disabled'}`}>
       <button
         type="submit"
         className="Button Button_bigger Button_color_yellow Button_onMobile_wider"
@@ -120,10 +116,7 @@ type connectedStore = {
     period: number;
   };
 };
-const SettingsFormContainer: React.FC<connectedStore> = ({
-  axiosPostSettings,
-  repoInfo,
-}) => {
+const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, repoInfo }) => {
   const { register, handleSubmit, setError, formState, setValue } = useForm<formData>({
     mode: 'onTouched',
     defaultValues: {

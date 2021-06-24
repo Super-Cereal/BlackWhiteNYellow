@@ -4,20 +4,74 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import FormTextField from './../common/FormFields/FormTextField/FormTextField';
-import { popUpBoxContainerProps } from './types';
+import Loader from '../common/Loader/Loader';
+import { popUpBoxContainerProps, formData, popUpBoxProps } from './types';
 
 // @ts-ignore
-import { axiosStartNewBuild } from '../../redux/buildHistory/buildHistoryActions';
+import { axiosStartNewBuild } from '../BuildHistory/buildHistoryReducer';
 
-const PopUpBox: React.FC<popUpBoxContainerProps> = ({ popUpAdditionalClass, togglePopUp, axiosStartNewBuild }) => {
-  const { register, handleSubmit, formState, setValue, setError } = useForm<{
-    commitHash: string;
-  }>({
+const PopUpBox: React.FC<popUpBoxProps> = ({
+  popUpAdditionalClass,
+  togglePopUp,
+  onSubmit,
+  register,
+  setValue,
+  errors,
+  isRequestInProgress,
+}) => (
+  <div className={`PopUpBox ${popUpAdditionalClass}`}>
+    <div className="PopUpBox-Titles">
+      <h2 className="PopUpBox-Titles-MainTitle fontType_subhead">New build</h2>
+      <h3 className="PopUpBox-Titles-InfoTitle">
+        Enter&nbsp;the&nbsp;commit&nbsp;hash which&nbsp;you&nbsp;want&nbsp;to&nbsp;build.
+      </h3>
+    </div>
+    <form onSubmit={onSubmit} className="PopUpBox-Form Form">
+      <div className="PopUpBox-Form-Inputs Form-Inputs">
+        <FormTextField
+          register={register}
+          name="commitHash"
+          placeholder="Commit hash"
+          validators={{ required: 'This field is required' }}
+          setValue={setValue}
+          errors={errors.commitHash}
+        />
+      </div>
+      <div className={`Form-ButtonsBlock ${isRequestInProgress && 'Form-ButtonsBlock_disabled'}`}>
+        <button
+          disabled={isRequestInProgress}
+          type="submit"
+          className="Button Button_bigger Button_color_yellow Button_onMobile_wider"
+        >
+          Run build
+        </button>
+        <button
+          disabled={isRequestInProgress}
+          onClick={togglePopUp}
+          className="Button Button_bigger Button_onMobile_wider"
+        >
+          Cancel
+        </button>
+        {isRequestInProgress && <Loader />}
+      </div>
+    </form>
+  </div>
+);
+
+const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({
+  popUpAdditionalClass,
+  togglePopUp,
+  axiosStartNewBuild,
+}) => {
+  const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
+  const { register, handleSubmit, formState, setValue, setError } = useForm<formData>({
     mode: 'onTouched',
   });
   const history = useHistory();
   const onSubmit = handleSubmit(async (data) => {
+    setIsRequestInProgress(true);
     const { status, data: build } = await axiosStartNewBuild(data.commitHash);
+    setIsRequestInProgress(false);
     if (status !== 200) {
       setError('commitHash', { type: 'manual', message: 'Wrong commit hash' });
     } else {
@@ -25,47 +79,14 @@ const PopUpBox: React.FC<popUpBoxContainerProps> = ({ popUpAdditionalClass, togg
     }
   });
   return (
-    <div className={`PopUpBox ${popUpAdditionalClass}`}>
-      <div className="PopUpBox-Titles">
-        <h2 className="PopUpBox-Titles-MainTitle fontType_subhead">New build</h2>
-        <h3 className="PopUpBox-Titles-InfoTitle">
-          Enter&nbsp;the&nbsp;commit&nbsp;hash which&nbsp;you&nbsp;want&nbsp;to&nbsp;build.
-        </h3>
-      </div>
-      <form onSubmit={onSubmit} className="PopUpBox-Form Form">
-        <div className="PopUpBox-Form-Inputs Form-Inputs">
-          <FormTextField
-            register={register}
-            name="commitHash"
-            placeholder="Commit hash"
-            validators={{ required: 'This field is required' }}
-            setValue={setValue}
-            errors={formState.errors.commitHash}
-          />
-        </div>
-        <div className="Form-ButtonsBlock">
-          <button type="submit" className="Button Button_bigger Button_color_yellow Button_onMobile_wider">
-            Run build
-          </button>
-          <button onClick={togglePopUp} className="Button Button_bigger Button_onMobile_wider">
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({
-  popUpAdditionalClass,
-  togglePopUp,
-  axiosStartNewBuild,
-}) => {
-  return (
     <PopUpBox
       popUpAdditionalClass={popUpAdditionalClass}
       togglePopUp={togglePopUp}
-      axiosStartNewBuild={axiosStartNewBuild}
+      onSubmit={onSubmit}
+      register={register}
+      setValue={setValue}
+      errors={formState.errors}
+      isRequestInProgress={isRequestInProgress}
     />
   );
 };

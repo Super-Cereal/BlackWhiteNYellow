@@ -18,6 +18,7 @@ export type connectedStoreContainerProps = {
   noBuild: boolean;
   build: buildType;
   axiosGetBuildInfo: (buildId: string) => void;
+  axiosStartNewBuild: (commitHash: string) => { status: number; data: any };
 };
 
 export type useParamsType = { buildId: string };
@@ -26,4 +27,6 @@ export type buildProps = {
   logsText: string;
   repoName: string;
   build: buildType;
+  onRebuild: any;
+  isRequestInProgress: boolean;
 };
