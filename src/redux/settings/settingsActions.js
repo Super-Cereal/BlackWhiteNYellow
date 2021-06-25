@@ -21,8 +21,8 @@ export const axiosPostSettings = (data) => async (dispatch) => {
     ...data,
     repoName: `https://github.com/${data.repoName}`,
   });
-  debugger;
   if (response.status === 200) {
     await dispatch(setSettings(data));
   }
+  return response;
 };

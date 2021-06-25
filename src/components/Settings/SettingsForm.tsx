@@ -135,11 +135,11 @@ const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, re
   const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
   const onSubmit = handleSubmit(async (data) => {
     setIsRequestInProgress(true);
-    const res = Promise.all([
+    
+    const [isRepoAvailable, isBranchAvailable] = await Promise.all([
       settingsDAL.checkIfRepoAvailable(data.repoName),
-      settingsDAL.checkIfBranchAvailable(data.mainBranch),
+      settingsDAL.checkIfBranchAvailable(data.repoName, data.mainBranch),
     ]);
-    const [isRepoAvailable, isBranchAvailable] = await res;
     if (!isRepoAvailable) {
       setIsRequestInProgress(false);
       return setError('repoName', {
@@ -154,7 +154,15 @@ const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, re
         message: 'This branch is unavailable',
       });
     }
-    await axiosPostSettings(data);
+
+    const response = await axiosPostSettings(data);
+    if (response.status !== 200) {
+      setIsRequestInProgress(false);
+      return setError(response.data.error.name, {
+        type: 'manual',
+        message: response.data.error.message,
+      });
+    }
     setIsRequestInProgress(false);
     history.push('/');
   });

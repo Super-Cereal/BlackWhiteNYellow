@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Header from '../Header&Footer/Header/Header';
+import Header from '../Header/Header';
 import PopUpBoxContainer from './PopUpBox';
 import Loader from '../common/Loader/Loader';
 import Card from '../common/Card/Card';

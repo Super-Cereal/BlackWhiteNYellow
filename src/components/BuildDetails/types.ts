@@ -12,13 +12,6 @@ export type buildType = {
 
 export type connectedStoreContainerProps = {
   repoName: string;
-  logsText: string;
-  clearBuildInfo: () => void;
-  isLoadingInProgress: boolean;
-  noBuild: boolean;
-  build: buildType;
-  axiosGetBuildInfo: (buildId: string) => void;
-  axiosStartNewBuild: (commitHash: string) => { status: number; data: any };
 };
 
 export type useParamsType = { buildId: string };

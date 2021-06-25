@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../Header&Footer/Header/Header';
+import Header from '../../Header/Header';
 
 const PageNotFound: React.FC = () => (
   <>

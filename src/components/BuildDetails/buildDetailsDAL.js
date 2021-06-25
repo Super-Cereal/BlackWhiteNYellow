@@ -1,4 +1,4 @@
-import instance from '../../redux/axiosInstance.js';
+import instance from '../../axios/axiosInstance.js';
 
 const buildHistoryDAL = {
   async axiosGetBuild(buildId) {

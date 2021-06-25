@@ -32,8 +32,3 @@ export const useRequestForAllBuilds = (offset) => {
 
   return state;
 };
-
-export const axiosStartNewBuild = async (commitHash) => {
-  const response = await buildHistoryDAL.axiosStartNewBuild(commitHash);
-  return response;
-};

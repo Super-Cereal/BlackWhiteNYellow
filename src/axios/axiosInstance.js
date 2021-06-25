@@ -13,11 +13,9 @@ instance.interceptors.request.use((request) => {
     timeout: r.timeout,
     url: r.baseURL + r.url,
     method: r.method,
+    data: r.data,
   });
-  console.log(
-    'Starting Request',
-    JSON.stringify(fullLogging ? request : transform(request), null, 2)
-  );
+  console.log('Starting Request', JSON.stringify(fullLogging ? request : transform(request), null, 2));
   return request;
 });
 
@@ -25,17 +23,8 @@ instance.interceptors.response.use((response) => {
   const transform = (r) => ({
     data: r.data,
     status: r.status,
-    config: {
-      withCredentials: r.config.withCredentials,
-      timeout: r.config.timeout,
-      url: r.config.baseURL + r.config.url,
-      method: r.config.method,
-    },
   });
-  console.log(
-    'Response:',
-    JSON.stringify(fullLogging ? response : transform(response), null, 2)
-  );
+  console.log('Response:', JSON.stringify(fullLogging ? response : transform(response), null, 2));
   return response;
 });
 

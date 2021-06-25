@@ -8,7 +8,7 @@ import Loader from '../common/Loader/Loader';
 import { popUpBoxContainerProps, formData, popUpBoxProps } from './types';
 
 // @ts-ignore
-import { axiosStartNewBuild } from '../BuildHistory/buildHistoryReducer';
+import startNewBuild from '../../axios/startNewBuild';
 
 const PopUpBox: React.FC<popUpBoxProps> = ({
   popUpAdditionalClass,
@@ -46,6 +46,7 @@ const PopUpBox: React.FC<popUpBoxProps> = ({
           Run build
         </button>
         <button
+          type="button"
           disabled={isRequestInProgress}
           onClick={togglePopUp}
           className="Button Button_bigger Button_onMobile_wider"
@@ -58,11 +59,7 @@ const PopUpBox: React.FC<popUpBoxProps> = ({
   </div>
 );
 
-const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({
-  popUpAdditionalClass,
-  togglePopUp,
-  axiosStartNewBuild,
-}) => {
+const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({ popUpAdditionalClass, togglePopUp }) => {
   const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
   const { register, handleSubmit, formState, setValue, setError } = useForm<formData>({
     mode: 'onTouched',
@@ -70,7 +67,7 @@ const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({
   const history = useHistory();
   const onSubmit = handleSubmit(async (data) => {
     setIsRequestInProgress(true);
-    const { status, data: build } = await axiosStartNewBuild(data.commitHash);
+    const { status, data: build } = await startNewBuild(data.commitHash);
     setIsRequestInProgress(false);
     if (status !== 200) {
       setError('commitHash', { type: 'manual', message: 'Wrong commit hash' });
@@ -91,4 +88,4 @@ const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({
   );
 };
 
-export default connect(null, { axiosStartNewBuild })(PopUpBoxContainer);
+export default connect(null)(PopUpBoxContainer);

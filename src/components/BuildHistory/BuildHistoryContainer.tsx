@@ -16,7 +16,7 @@ const BuildHistoryContainer: React.FC<popUpBoxContainerProps & connectedStoreCon
   togglePopUp,
   repoName,
 }) => {
-  const [offset, setOffset] = React.useState(1);
+  const [offset, setOffset] = React.useState(0);
   const onShowMore = () => setOffset(offset + 1);
   const state = useRequestForAllBuilds(offset);
   return (

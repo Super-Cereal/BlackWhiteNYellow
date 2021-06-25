@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from '../Header&Footer/Header/Header';
+import Header from '../Header/Header';
 import SettingsFormContainer from './SettingsForm';
 
 const Settings: React.FC = () => (

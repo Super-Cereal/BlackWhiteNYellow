@@ -1,4 +1,4 @@
-import instance from '../axiosInstance.js';
+import instance from '../../axios/axiosInstance';
 
 const settingsDAL = {
   async axiosGetSettings() {
@@ -27,11 +27,11 @@ const settingsDAL = {
       return false;
     }
   },
-  async checkIfBranchAvailable(branchName) {
+  async checkIfBranchAvailable(repoName, branchName) {
     try {
       await instance.get(branchName, {
         withCredentials: false,
-        baseURL: 'https://api.github.com/repos/Super-Cereal/AsyncArray_filter/branches/',
+        baseURL: `https://api.github.com/repos/${repoName}/branches/`,
       });
       return true;
     } catch (e) {

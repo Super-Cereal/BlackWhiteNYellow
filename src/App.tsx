@@ -6,7 +6,7 @@ import StartScreen from './components/StartScreen/StartScreen';
 import Settings from './components/Settings/Settings';
 import BuildHistoryContainer from './components/BuildHistory/BuildHistoryContainer';
 import BuildDetailsContainer from './components/BuildDetails/BuildDetailsContainer';
-import Footer from './components/Header&Footer/Footer/Footer';
+import Footer from './components/Footer/Footer';
 import Loader from './components/common/Loader/Loader';
 import PageNotFound from './components/common/PageNotFound/PageNotFound';
 

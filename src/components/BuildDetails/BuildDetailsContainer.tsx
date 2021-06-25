@@ -10,20 +10,20 @@ import { settingsRepoInfoSS } from '../../redux/storeSelectors';
 // @ts-ignore
 import { useRequestForBuildDetails } from './buildDetailsReducer';
 // @ts-ignore
-import { axiosStartNewBuild } from './../BuildHistory/buildHistoryReducer';
+import startNewBuild from '../../axios/startNewBuild';
 
 import Loader from '../common/Loader/Loader';
 import PageNotFound from '../common/PageNotFound/PageNotFound';
 
-const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({ repoName, axiosStartNewBuild }) => {
+const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({ repoName }) => {
   const { buildId } = useParams<useParamsType>();
-  const stateReqBuildDetails = useRequestForBuildDetails(buildId);
-  
+  const state = useRequestForBuildDetails(buildId);
+
   const history = useHistory();
   const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
   const onRebuild = async () => {
     setIsRequestInProgress(true);
-    const { status, data: build } = await axiosStartNewBuild(stateReqBuildDetails.build.commitHash);
+    const { status, data: build } = await startNewBuild(state.build.commitHash);
     setIsRequestInProgress(false);
     if (status !== 200) {
       throw build;
@@ -31,19 +31,19 @@ const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({ repoNam
       history.push(`/build/${build.id}`);
     }
   };
-  return stateReqBuildDetails.isFetching ? (
+  return state.isFetching ? (
     <div className="Page">
       <Loader />
     </div>
-  ) : stateReqBuildDetails.noBuild ? (
+  ) : state.noBuild ? (
     <PageNotFound />
   ) : (
     <BuildDetails
       onRebuild={onRebuild}
       isRequestInProgress={isRequestInProgress}
       repoName={repoName}
-      logsText={stateReqBuildDetails.logsText}
-      build={stateReqBuildDetails.build}
+      logsText={state.logsText}
+      build={state.build}
     />
   );
 };
@@ -52,8 +52,5 @@ const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({ repoNam
 const mstp = (state) => ({
   repoName: settingsRepoInfoSS(state).repoName,
 });
-// @ts-ignore
-const odtp = ({
-  axiosStartNewBuild
-})
-export default connect(mstp, odtp)(BuildDetailsContainer);
+
+export default connect(mstp)(BuildDetailsContainer);
