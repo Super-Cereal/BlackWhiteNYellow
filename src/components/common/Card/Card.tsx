@@ -31,7 +31,8 @@ const Card: React.FC<CardProps> = ({
     minutes = Math.floor(period / 60000) % 60;
     seconds = Math.floor(period / 1000) % 60;
     if (hours && minutes) periodOfBuild += `${hours} h, `;
-    if (minutes) periodOfBuild += `${minutes} min, `;
+    if (minutes && !hours) periodOfBuild += `${minutes} min, `;
+    else if (minutes && hours) periodOfBuild += `${minutes} min`;
     if (!hours) periodOfBuild += `${seconds} sec`;
   }
   return (
