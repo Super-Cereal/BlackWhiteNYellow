@@ -24,9 +24,6 @@
   &:focus {
     box-shadow: 0 0 0 2px $gray_border_focused;
   }
-  &:disabled {
-    background-color: $gray_disabled;
-  }
   &_withIcon {
     &::before {
       display: inline-block;
@@ -55,6 +52,11 @@
         box-shadow: 0 0 0 2px $yellow_border_focused;
       }
     }
+  }
+  &:disabled {
+    cursor: initial;
+    background-color: $gray_disabled;
+    color: $gray_text_disabled;
   }
 }
 

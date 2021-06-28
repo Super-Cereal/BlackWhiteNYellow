@@ -1,5 +1,5 @@
 .PopUpBox {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -15,6 +15,15 @@
   &-Form-Inputs {
     padding-top: 0;
     padding-bottom: 5px;
+  }
+}
+
+.BuildHistory-Cards {
+  position: relative;
+  .Loader {
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 }
 

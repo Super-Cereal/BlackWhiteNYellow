@@ -1,8 +1,14 @@
 .App {
+  position: relative;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   min-height: 100vh;
+  .Loader {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .Page {

@@ -20,7 +20,7 @@
       content: '\e901';
     }
   }
-  &_failed {
+  &_fail {
     &::before {
       color: $red;
       content: '\e900';
@@ -100,7 +100,7 @@
     &_success {
       color: $green;
     }
-    &_failed {
+    &_fail {
       color: $red;
     }
     &_waiting {

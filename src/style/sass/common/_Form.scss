@@ -36,7 +36,7 @@
       &_required {
         &::after {
           display: inline;
-          content: " *";
+          content: ' *';
           color: $red;
         }
       }
@@ -92,8 +92,18 @@
   }
   &-ButtonsBlock {
     display: flex;
+    position: relative;
+    width: fit-content;
+    &_disabled {
+      margin-top: 20px;
+    }
     .Button:nth-child(n + 2) {
       margin-left: 10px;
+    }
+    .Loader {
+      left: 50%;
+      top: -25px;
+      transform: translateX(-50%);
     }
   }
 }

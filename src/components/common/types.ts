@@ -1,11 +1,11 @@
 export type CardProps = {
-  status: 'success' | 'failed' | 'waiting';
-  buildNumber: string;
+  status: 'Success' | 'Failed' | 'Waiting';
+  buildNumber: number;
   commitText: string;
   commitBranch: string;
-  commitShortHash: string;
+  commitHash: string;
   commitAuthor: string;
   date: string;
-  period: string;
+  period: number;
   isStatic?: boolean;
 };

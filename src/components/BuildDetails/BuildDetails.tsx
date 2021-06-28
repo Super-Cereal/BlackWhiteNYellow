@@ -1,39 +1,39 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Header from '../Header&Footer/Header/Header';
+import Header from '../Header/Header';
 import Card from './../common/Card/Card';
 
-type BuildProps = {
-  logsText: string;
-  repoName: string;
-  authorName: string;
-};
+import { buildProps } from './types';
 
-const BuildDetails: React.FC<BuildProps> = ({ logsText, authorName, repoName }) => {
-  const titleText = `${authorName}/${repoName}`;
-  const headerType = 'BuildDetails';
+const BuildDetails: React.FC<buildProps> = ({ logsText, repoName, build, onRebuild, isRequestInProgress }) => {
   const buttons = (
     <>
-      <button className="Button Button_withIcon Button_withIcon_rebuild Button_onMobile_removeText">
+      <button
+        disabled={isRequestInProgress}
+        onClick={onRebuild}
+        className="Button Button_withIcon Button_withIcon_rebuild Button_onMobile_removeText"
+      >
         <span className="Button-Text">Rebuild</span>
       </button>
-      <button className="Button Button_withIcon Button_withIcon_settings"></button>
+      <Link to="/settings" className="Button Button_withIcon Button_withIcon_settings"></Link>
     </>
   );
   return (
     <>
-      <Header titleText={titleText} headerType={headerType} buttons={buttons} />
+      <Header titleText={repoName} headerType={'BuildDetails'} buttons={buttons} />
       <div className="BuildDetails Page">
         <Card
+          status={build.status}
+          buildNumber={build.buildNumber}
+          commitText={build.commitMessage}
+          commitBranch={build.branchName}
+          commitHash={build.commitHash}
+          commitAuthor={build.authorName}
+          date={build.start}
+          period={build.duration}
+          key={build.id}
           isStatic={true}
-          status="success"
-          buildNumber="5122"
-          commitText="smthing really important in this commitText dada yesyes"
-          commitBranch="master"
-          commitShortHash="b4636ab"
-          commitAuthor="Philip Kirkorov"
-          date="21 янв, 03:06"
-          period="1 ч 20 мин"
         />
         <div className="BuildDetails-Logs">
           <pre dangerouslySetInnerHTML={{ __html: logsText }}></pre>
