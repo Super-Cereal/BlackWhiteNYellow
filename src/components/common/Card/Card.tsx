@@ -30,6 +30,7 @@ const Card: React.FC<CardProps> = ({
   let time, day, month;
   if (date) {
     let [dateP, time] = date.split('T');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     time = time.substr(0, time.lastIndexOf(':'));
     // prettier-ignore
     [, month, day] = dateP.split('-');
