@@ -1,3 +1,5 @@
+@import '/src/style/sass/setup/';
+
 .Form {
   @include media(width, (350px, 400px, 475px));
   &-Inputs {

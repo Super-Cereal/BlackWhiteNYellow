@@ -2,6 +2,8 @@ import React from 'react';
 
 import { CardProps } from '../types';
 
+import './Card.scss';
+
 const Card: React.FC<CardProps> = ({
   status,
   buildNumber,
@@ -39,9 +41,7 @@ const Card: React.FC<CardProps> = ({
     <div className={`Card Card_${status.toLowerCase()} Card_static_${isStatic}`}>
       <div className="Card-InfoWrapper">
         <div className="Card-NumberNText">
-          <div
-            className={`Card-BuildNumber Card-BuildNumber_${status.toLowerCase()} fontType_subhead`}
-          >
+          <div className={`Card-BuildNumber Card-BuildNumber_${status.toLowerCase()} fontType_subhead`}>
             {'#' + buildNumber}
           </div>
           <div className="Card-CommitText fontType_caption">{commitText}</div>

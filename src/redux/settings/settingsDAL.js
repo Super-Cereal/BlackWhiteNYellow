@@ -2,18 +2,10 @@ import instance from '../../axios/axiosInstance';
 
 const settingsDAL = {
   async axiosGetSettings() {
-    try {
-      return await instance.get('/settings').then((res) => res.data);
-    } catch (e) {
-      throw Error(e);
-    }
+    return await instance.get('/settings').then((res) => res.data);
   },
   async axiosPostSettings(data) {
-    try {
-      return await instance.post('/settings', data).then((res) => res.data);
-    } catch (e) {
-      throw Error(e);
-    }
+    return await instance.post('/settings', data).then((res) => res.data);
   },
   async checkIfRepoAvailable(repoName) {
     try {

@@ -6,6 +6,8 @@ import Card from './../common/Card/Card';
 
 import { buildProps } from './types';
 
+import './BuildDetails.scss';
+
 const BuildDetails: React.FC<buildProps> = ({ logsText, repoName, build, onRebuild, isRequestInProgress }) => {
   const buttons = (
     <>

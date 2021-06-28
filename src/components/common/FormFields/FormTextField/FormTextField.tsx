@@ -2,6 +2,8 @@ import React from 'react';
 
 import { FieldProps } from '../types';
 
+import '../Form.scss';
+
 const FormTextField: React.FC<FieldProps> = ({
   label,
   name,
@@ -28,9 +30,7 @@ const FormTextField: React.FC<FieldProps> = ({
       )}
       <div className="Form-InputBlock_text-InputBox">
         <input
-          className={`Form-InputBlock-Input Form-InputBlock_text-Input ${
-            errors && 'Form-InputBlock-Input_withError'
-          }`}
+          className={`Form-InputBlock-Input Form-InputBlock_text-Input ${errors && 'Form-InputBlock-Input_withError'}`}
           id={name}
           {...register(name, validators)}
           placeholder={placeholder}

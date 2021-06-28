@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import configurationImage from '../../style/images/configuration.svg';
 
+import './StartScreen.scss';
+
 const StartScreen: React.FC = () => {
   const titleText = 'School CI server';
   const headerType = 'StartScreen';
   const buttons = (
-    <Link
-      to="/settings"
-      className="Button Button_withIcon Button_withIcon_settings Button_onMobile_removeText"
-    >
+    <Link to="/settings" className="Button Button_withIcon Button_withIcon_settings Button_onMobile_removeText">
       <span className="Button-Text">Settings</span>
     </Link>
   );
@@ -20,11 +19,7 @@ const StartScreen: React.FC = () => {
       <Header titleText={titleText} headerType={headerType} buttons={buttons} />
       <div className="StartScreen Page">
         <div className="StartScreen-Settings">
-          <img
-            src={configurationImage}
-            alt="configuration"
-            className="StartScreen-Settings-Image"
-          />
+          <img src={configurationImage} alt="configuration" className="StartScreen-Settings-Image" />
           <p className="StartScreen-Settings-Text">
             Configure repository connection
             <br />

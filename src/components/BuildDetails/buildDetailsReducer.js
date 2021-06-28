@@ -13,11 +13,9 @@ const defaultState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'fetched':
-      return { ...state, isFetching: false };
-    case 'startFetching':
-      return { ...state, isFetching: true };
-      case 'noBuild':
+    case 'setIsFetching':
+      return { ...state, isFetching: action.payload };
+    case 'noBuild':
       return { ...state, noBuild: true };
     case 'setBuildData':
       return { ...state, build: action.payload };
@@ -32,7 +30,7 @@ export const useRequestForBuildDetails = (buildId) => {
   const [state, dispatch] = React.useReducer(reducer, defaultState);
 
   React.useEffect(() => {
-    dispatch({type: 'startFetching'})
+    dispatch({ type: 'setIsFetching', payload: true });
     Promise.all([buildDetailsDAL.axiosGetBuild(buildId), buildDetailsDAL.axiosGetBuildLogs(buildId)]).then(
       ([build, logs]) => {
         if (build.status === 200) {
@@ -44,7 +42,7 @@ export const useRequestForBuildDetails = (buildId) => {
         } else {
           dispatch({ type: 'noBuild' });
         }
-        dispatch({ type: 'fetched' });
+        dispatch({ type: 'setIsFetching', payload: false });
       }
     );
   }, [buildId]);

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { HeaderProps } from './types';
 
+import './Header.scss';
+
 const Header: React.FC<HeaderProps> = ({ titleText, headerType, buttons }) => {
   return (
     <header className="Header">

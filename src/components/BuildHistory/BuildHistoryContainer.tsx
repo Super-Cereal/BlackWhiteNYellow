@@ -4,7 +4,8 @@ import { compose } from 'redux';
 
 import BuildHistory from './BuildHistory';
 import withTransparentBackground from '../_HOC/withTransparentBackground';
-import { popUpBoxContainerProps, connectedStoreContainerProps } from './types';
+import { connectedStoreContainerProps } from './types';
+import { popUpBoxContainerProps } from '../common/PopUpBox/types';
 
 // @ts-ignore
 import { settingsRepoInfoSS } from '../../redux/storeSelectors';
@@ -18,14 +19,14 @@ const BuildHistoryContainer: React.FC<popUpBoxContainerProps & connectedStoreCon
 }) => {
   const [offset, setOffset] = React.useState(0);
   const onShowMore = () => setOffset(offset + 1);
-  const state = useRequestForAllBuilds(offset);
+  const allBuilds = useRequestForAllBuilds(offset);
   return (
     <BuildHistory
       popUpAdditionalClass={popUpAdditionalClass}
       togglePopUp={togglePopUp}
       repoName={repoName}
-      builds={state.builds}
-      isFetching={state.isFetching}
+      builds={allBuilds.builds}
+      isFetching={allBuilds.isFetching}
       onShowMore={onShowMore}
     />
   );

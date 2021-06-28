@@ -3,12 +3,14 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import FormTextField from './../common/FormFields/FormTextField/FormTextField';
-import Loader from '../common/Loader/Loader';
+import FormTextField from '../FormFields/FormTextField/FormTextField';
+import Loader from '../Loader/Loader';
 import { popUpBoxContainerProps, formData, popUpBoxProps } from './types';
 
 // @ts-ignore
-import startNewBuild from '../../axios/startNewBuild';
+import startNewBuild from '../../../axios/startNewBuild';
+
+import './PopUpBox.scss';
 
 const PopUpBox: React.FC<popUpBoxProps> = ({
   popUpAdditionalClass,

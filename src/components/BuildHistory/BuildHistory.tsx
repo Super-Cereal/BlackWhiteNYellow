@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../Header/Header';
-import PopUpBoxContainer from './PopUpBox';
+import PopUpBoxContainer from '../common/PopUpBox/PopUpBox';
 import Loader from '../common/Loader/Loader';
 import Card from '../common/Card/Card';
 
 import { buildHistoryProps, popUpBoxBuildProps } from './types';
+
+import './BuildHistory.scss';
 
 const BuildHistory: React.FC<buildHistoryProps & popUpBoxBuildProps> = ({
   repoName,

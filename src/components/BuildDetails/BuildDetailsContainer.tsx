@@ -17,33 +17,30 @@ import PageNotFound from '../common/PageNotFound/PageNotFound';
 
 const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({ repoName }) => {
   const { buildId } = useParams<useParamsType>();
-  const state = useRequestForBuildDetails(buildId);
+  const buildDetails = useRequestForBuildDetails(buildId);
 
   const history = useHistory();
   const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
   const onRebuild = async () => {
     setIsRequestInProgress(true);
-    const { status, data: build } = await startNewBuild(state.build.commitHash);
+    const { status, data: build } = await startNewBuild(buildDetails.build.commitHash);
     setIsRequestInProgress(false);
-    if (status !== 200) {
-      throw build;
-    } else {
-      history.push(`/build/${build.id}`);
-    }
+    if (status === 200) history.push(`/build/${build.id}`);
   };
-  return state.isFetching ? (
+
+  return buildDetails.isFetching ? (
     <div className="Page">
       <Loader />
     </div>
-  ) : state.noBuild ? (
+  ) : buildDetails.noBuild ? (
     <PageNotFound />
   ) : (
     <BuildDetails
       onRebuild={onRebuild}
       isRequestInProgress={isRequestInProgress}
       repoName={repoName}
-      logsText={state.logsText}
-      build={state.build}
+      logsText={buildDetails.logsText}
+      build={buildDetails.build}
     />
   );
 };

@@ -1,0 +1,22 @@
+@import '/src/style/sass/setup/';
+
+.BuildHistory-Cards {
+  position: relative;
+  .Loader {
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (orientation: portrait) {
+  .BuildHistory {
+    &-Button {
+      width: 100%;
+      padding: 10.5px;
+    }
+  }
+  .PopUpBox {
+    width: 80%;
+  }
+}
