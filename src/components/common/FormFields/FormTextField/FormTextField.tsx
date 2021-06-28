@@ -12,9 +12,11 @@ const FormTextField: React.FC<FieldProps> = ({
   errors,
   placeholder = '',
   setValue,
+  setFocus,
 }) => {
   const onClickHandler = () => {
     setValue(name, '', { shouldValidate: true });
+    setFocus(name);
   };
   return (
     <div className="Form-InputBlock Form-InputBlock_text">

@@ -22,6 +22,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
   onClickRedirect,
   errors,
   setValue,
+  setFocus,
   regExps,
   isRequestInProgress,
 }) => (
@@ -41,6 +42,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
           },
         }}
         setValue={setValue}
+        setFocus={setFocus}
       />
       <FormTextField
         register={register}
@@ -51,6 +53,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
           required: 'This field is required',
         }}
         setValue={setValue}
+        setFocus={setFocus}
         placeholder="Build command"
       />
       <FormTextField
@@ -65,6 +68,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
           },
         }}
         setValue={setValue}
+        setFocus={setFocus}
         placeholder="master"
       />
       <FormNumberField
@@ -83,6 +87,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
           },
         }}
         setValue={setValue}
+        setFocus={setFocus}
         value="minutes"
       />
     </div>
@@ -117,7 +122,7 @@ type connectedStore = {
   };
 };
 const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, repoInfo }) => {
-  const { register, handleSubmit, setError, formState, setValue } = useForm<formData>({
+  const { register, handleSubmit, setError, formState, setValue, setFocus } = useForm<formData>({
     mode: 'onTouched',
     defaultValues: {
       period: repoInfo.period || 10,
@@ -136,6 +141,7 @@ const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, re
   const onSubmit = handleSubmit(async (data) => {
     setIsRequestInProgress(true);
 
+    data.mainBranch = data.mainBranch || 'master';
     // запросы к git api
     const [isRepoAvailable, isBranchAvailable] = await Promise.all([
       settingsDAL.checkIfRepoAvailable(data.repoName),
@@ -175,6 +181,7 @@ const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, re
       onSubmit={onSubmit}
       errors={formState.errors}
       setValue={setValue}
+      setFocus={setFocus}
       onClickRedirect={onClickRedirect}
       isRequestInProgress={isRequestInProgress}
       regExps={{

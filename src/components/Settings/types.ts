@@ -1,5 +1,5 @@
 import { FormEventHandler } from 'react';
-import { DeepMap, FieldError } from 'react-hook-form';
+import { DeepMap, FieldError, UseFormSetFocus, UseFormSetValue } from 'react-hook-form';
 
 export type formData = {
   repoName: string;
@@ -13,7 +13,8 @@ export type settingsFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement>;
   onClickRedirect: any;
   errors: DeepMap<formData, FieldError>;
-  setValue: Function;
+  setValue: UseFormSetValue<formData>;
+  setFocus: UseFormSetFocus<formData>;
   regExps: {
     repoName: RegExp;
     branchName: RegExp;

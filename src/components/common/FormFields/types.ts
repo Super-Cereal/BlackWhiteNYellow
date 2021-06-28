@@ -22,5 +22,6 @@ export type FieldProps = {
   errors?: FieldError | undefined;
   value?: string;
   setValue: Function;
+  setFocus: Function;
   placeholder?: string;
 };
