@@ -21,6 +21,7 @@ export type connectedStoreContainerProps = {
     };
   };
   axiosGetBuildDetails: (buildId: string) => void;
+  clearBuildDetailsLoadInfo: () => any;
 };
 
 export type useParamsType = { buildId: string };

@@ -9,7 +9,7 @@ import PageNotFound from '../common/PageNotFound/PageNotFound';
 // @ts-ignore
 import { settingsSS, buildDetailsSS } from '../../redux/storeSelectors';
 // @ts-ignore
-import { axiosGetBuildDetails } from './../../redux/BuildDetails/buildDetailsActions';
+import { axiosGetBuildDetails, clearBuildDetailsLoadInfo } from './../../redux/BuildDetails/buildDetailsActions';
 // @ts-ignore
 import startNewBuild from '../../axios/startNewBuild';
 
@@ -19,9 +19,13 @@ const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
   repoName,
   buildDetails,
   axiosGetBuildDetails,
+  clearBuildDetailsLoadInfo,
 }) => {
   const { buildId } = useParams<useParamsType>();
-  React.useEffect(() => axiosGetBuildDetails(buildId), [buildId, axiosGetBuildDetails]);
+  React.useEffect(() => {
+    axiosGetBuildDetails(buildId);
+    return clearBuildDetailsLoadInfo;
+  }, [buildId, axiosGetBuildDetails, clearBuildDetailsLoadInfo]);
 
   const history = useHistory();
   const [isRebuildInProgress, setIsRebuildInProgress] = React.useState(false);
@@ -51,6 +55,7 @@ const mstp = (state) => ({
 
 const odtp = {
   axiosGetBuildDetails,
+  clearBuildDetailsLoadInfo,
 };
 
 export default connect(mstp, odtp)(BuildDetailsContainer);

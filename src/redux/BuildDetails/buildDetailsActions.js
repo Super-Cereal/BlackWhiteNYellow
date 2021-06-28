@@ -4,6 +4,7 @@ export const SET_IS_FETCHING = 'SET_IS_FETCHING';
 export const SET_BUILD_DATA = 'SET_BUILD_DATA';
 export const SET_BUILD_LOGS = 'SET_BUILD_LOGS';
 export const NO_BUILD = 'NO_BUILD';
+export const CLEAR = 'CLEAR';
 
 export const axiosGetBuildDetails = (buildId) => async (dispatch) => {
   dispatch({ type: SET_IS_FETCHING, payload: true });
@@ -23,3 +24,5 @@ export const axiosGetBuildDetails = (buildId) => async (dispatch) => {
   }
   dispatch({ type: SET_IS_FETCHING, payload: false });
 };
+
+export const clearBuildDetailsLoadInfo = () => CLEAR;
