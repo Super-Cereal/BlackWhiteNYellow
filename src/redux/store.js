@@ -3,8 +3,8 @@ import ThunkMiddleware from 'redux-thunk';
 import { typeToAction } from './middlewares';
 
 import appReducer from './app/appReducer';
-import settingsReducer from './settings/settingsReducer';
-import buildDetailsReducer from './BuildDetails/buildDetailsReducer';
+import settingsReducer from '../components/Settings/redux/settingsReducer';
+import buildDetailsReducer from '../components/BuildDetails/redux/buildDetailsReducer';
 
 let reducers = combineReducers({
   app: appReducer,

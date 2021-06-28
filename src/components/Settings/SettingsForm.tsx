@@ -9,10 +9,10 @@ import Loader from '../common/Loader/Loader';
 import { settingsFormProps, formData } from './types';
 
 // @ts-ignore
-import settingsDAL from '../../redux/settings/settingsDAL';
+import settingsDAL from './redux/settingsDAL';
 // @ts-ignore
 // prettier-ignore
-import { axiosPostSettings } from '../../redux/settings/settingsActions';
+import { axiosPostSettings } from './redux/settingsActions';
 // @ts-ignore
 import { settingsSS } from '../../redux/storeSelectors';
 

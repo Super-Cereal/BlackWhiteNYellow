@@ -9,7 +9,7 @@ import PageNotFound from '../common/PageNotFound/PageNotFound';
 // @ts-ignore
 import { settingsSS, buildDetailsSS } from '../../redux/storeSelectors';
 // @ts-ignore
-import { axiosGetBuildDetails, clearBuildDetailsLoadInfo } from './../../redux/BuildDetails/buildDetailsActions';
+import { axiosGetBuildDetails, clearBuildDetailsLoadInfo } from './redux/buildDetailsActions';
 // @ts-ignore
 import startNewBuild from '../../axios/startNewBuild';
 

@@ -1,4 +1,4 @@
-import { axiosGetSettings } from '../settings/settingsActions';
+import { axiosGetSettings } from '../../components/Settings/redux/settingsActions';
 
 export const INITIALIZE_APP_SUCCESS = 'INITIALIZE_APP_SUCCESS';
 
