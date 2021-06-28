@@ -1,16 +1,28 @@
-// SS - state selector
-export const appIsInitializedSS = (state) => state.app.isInitialized;
-
-export const settingsHaveSettingsSS = (state) => state.settings.haveSettings;
-
-export const settingsRepoInfoSS = (state) => {
-  const set = state.settings;
-  return {
-    repoName: set.repoName,
-    period: set.period,
-    mainBranch: set.mainBranch,
-    buildCommand: set.buildCommand,
-  };
+// SS - state selectors
+export const appSS = {
+  isInitialized: (state) => state.app.isInitialized,
 };
 
-export const buildHistoryBuildsSS = (state) => state.buildHistory.builds;
+export const settingsSS = {
+  haveSettings: (state) => state.settings.haveSettings,
+  repoInfo: (state) => {
+    const set = state.settings;
+    return {
+      repoName: set.repoName,
+      period: set.period,
+      mainBranch: set.mainBranch,
+      buildCommand: set.buildCommand,
+    };
+  },
+};
+
+export const buildDetailsSS = {
+  buildInfo: (state) => ({
+    ...state.buildDetails.build,
+    logsText: state.buildDetails.logsText,
+  }),
+  loadInfo: (state) => ({
+    noBuild: state.buildDetails.noBuild,
+    isFetching: state.buildDetails.isFetching,
+  }),
+};

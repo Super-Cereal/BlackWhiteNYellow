@@ -3,51 +3,54 @@ import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import BuildDetails from './BuildDetails';
-import { connectedStoreContainerProps, useParamsType } from './types';
-
-// @ts-ignore
-import { settingsRepoInfoSS } from '../../redux/storeSelectors';
-// @ts-ignore
-import { useRequestForBuildDetails } from './buildDetailsReducer';
-// @ts-ignore
-import startNewBuild from '../../axios/startNewBuild';
-
 import Loader from '../common/Loader/Loader';
 import PageNotFound from '../common/PageNotFound/PageNotFound';
 
-const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({ repoName }) => {
+// @ts-ignore
+import { settingsSS, buildDetailsSS } from '../../redux/storeSelectors';
+// @ts-ignore
+import { axiosGetBuildDetails } from './../../redux/BuildDetails/buildDetailsActions';
+// @ts-ignore
+import startNewBuild from '../../axios/startNewBuild';
+
+import { connectedStoreContainerProps, useParamsType } from './types';
+
+const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
+  repoName,
+  buildDetails,
+  axiosGetBuildDetails,
+}) => {
   const { buildId } = useParams<useParamsType>();
-  const buildDetails = useRequestForBuildDetails(buildId);
+  React.useEffect(() => axiosGetBuildDetails(buildId), [buildId, axiosGetBuildDetails]);
 
   const history = useHistory();
-  const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
+  const [isRebuildInProgress, setIsRebuildInProgress] = React.useState(false);
   const onRebuild = async () => {
-    setIsRequestInProgress(true);
+    setIsRebuildInProgress(true);
     const { status, data: build } = await startNewBuild(buildDetails.build.commitHash);
-    setIsRequestInProgress(false);
+    setIsRebuildInProgress(false);
     if (status === 200) history.push(`/build/${build.id}`);
   };
 
-  return buildDetails.isFetching ? (
+  return buildDetails.loadInfo.isFetching ? (
     <div className="Page">
       <Loader />
     </div>
-  ) : buildDetails.noBuild ? (
+  ) : buildDetails.loadInfo.noBuild ? (
     <PageNotFound />
   ) : (
-    <BuildDetails
-      onRebuild={onRebuild}
-      isRequestInProgress={isRequestInProgress}
-      repoName={repoName}
-      logsText={buildDetails.logsText}
-      build={buildDetails.build}
-    />
+    <BuildDetails rebuild={{ onRebuild, isRebuildInProgress }} repoName={repoName} build={buildDetails.build} />
   );
 };
 
 // @ts-ignore
 const mstp = (state) => ({
-  repoName: settingsRepoInfoSS(state).repoName,
+  repoName: settingsSS.repoInfo(state).repoName,
+  buildDetails: { build: buildDetailsSS.buildInfo(state), loadInfo: buildDetailsSS.loadInfo(state) },
 });
 
-export default connect(mstp)(BuildDetailsContainer);
+const odtp = {
+  axiosGetBuildDetails,
+};
+
+export default connect(mstp, odtp)(BuildDetailsContainer);

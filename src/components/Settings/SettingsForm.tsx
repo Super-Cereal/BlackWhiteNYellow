@@ -14,7 +14,7 @@ import settingsDAL from '../../redux/settings/settingsDAL';
 // prettier-ignore
 import { axiosPostSettings } from '../../redux/settings/settingsActions';
 // @ts-ignore
-import { settingsRepoInfoSS } from '../../redux/storeSelectors';
+import { settingsSS } from '../../redux/storeSelectors';
 
 const SettingsForm: React.FC<settingsFormProps> = ({
   register,
@@ -135,7 +135,8 @@ const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, re
   const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
   const onSubmit = handleSubmit(async (data) => {
     setIsRequestInProgress(true);
-    
+
+    // запросы к git api
     const [isRepoAvailable, isBranchAvailable] = await Promise.all([
       settingsDAL.checkIfRepoAvailable(data.repoName),
       settingsDAL.checkIfBranchAvailable(data.repoName, data.mainBranch),
@@ -154,6 +155,7 @@ const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, re
         message: 'This branch is unavailable',
       });
     }
+    // ----
 
     const response = await axiosPostSettings(data);
     if (response.status !== 200) {
@@ -185,6 +187,6 @@ const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, re
 
 // @ts-ignore
 const mstp = (state) => ({
-  repoInfo: settingsRepoInfoSS(state),
+  repoInfo: settingsSS.repoInfo(state),
 });
 export default connect(mstp, { axiosPostSettings })(SettingsFormContainer);

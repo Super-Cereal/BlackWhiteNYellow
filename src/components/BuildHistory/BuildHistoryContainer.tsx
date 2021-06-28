@@ -8,7 +8,7 @@ import { connectedStoreContainerProps } from './types';
 import { popUpBoxContainerProps } from '../common/PopUpBox/types';
 
 // @ts-ignore
-import { settingsRepoInfoSS } from '../../redux/storeSelectors';
+import { settingsSS } from '../../redux/storeSelectors';
 // @ts-ignore
 import { useRequestForAllBuilds } from './buildHistoryReducer';
 
@@ -34,7 +34,7 @@ const BuildHistoryContainer: React.FC<popUpBoxContainerProps & connectedStoreCon
 
 // @ts-ignore
 const mstp = (state) => ({
-  repoName: settingsRepoInfoSS(state).repoName,
+  repoName: settingsSS.repoInfo(state).repoName,
 });
 
 export default compose(connect(mstp), withTransparentBackground)(BuildHistoryContainer);

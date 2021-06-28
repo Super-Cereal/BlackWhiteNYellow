@@ -5,6 +5,7 @@ export type buildType = {
   branchName: string;
   commitHash: string;
   authorName: string;
+  logsText: string;
   start: string;
   duration: number;
   id: string;
@@ -12,14 +13,23 @@ export type buildType = {
 
 export type connectedStoreContainerProps = {
   repoName: string;
+  buildDetails: {
+    build: buildType;
+    loadInfo: {
+      noBuild: boolean;
+      isFetching: boolean;
+    };
+  };
+  axiosGetBuildDetails: (buildId: string) => void;
 };
 
 export type useParamsType = { buildId: string };
 
 export type buildProps = {
-  logsText: string;
   repoName: string;
   build: buildType;
-  onRebuild: any;
-  isRequestInProgress: boolean;
+  rebuild: {
+    onRebuild: any;
+    isRebuildInProgress: boolean;
+  };
 };

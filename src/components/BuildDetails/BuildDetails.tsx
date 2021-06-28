@@ -8,12 +8,12 @@ import { buildProps } from './types';
 
 import './BuildDetails.scss';
 
-const BuildDetails: React.FC<buildProps> = ({ logsText, repoName, build, onRebuild, isRequestInProgress }) => {
+const BuildDetails: React.FC<buildProps> = ({ rebuild, repoName, build }) => {
   const buttons = (
     <>
       <button
-        disabled={isRequestInProgress}
-        onClick={onRebuild}
+        disabled={rebuild.isRebuildInProgress}
+        onClick={rebuild.onRebuild}
         className="Button Button_withIcon Button_withIcon_rebuild Button_onMobile_removeText"
       >
         <span className="Button-Text">Rebuild</span>
@@ -38,7 +38,7 @@ const BuildDetails: React.FC<buildProps> = ({ logsText, repoName, build, onRebui
           isStatic={true}
         />
         <div className="BuildDetails-Logs">
-          <pre dangerouslySetInnerHTML={{ __html: logsText }}></pre>
+          <pre dangerouslySetInnerHTML={{ __html: build.logsText }}></pre>
         </div>
       </div>
     </>

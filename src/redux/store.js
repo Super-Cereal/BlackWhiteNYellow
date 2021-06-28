@@ -4,10 +4,12 @@ import { typeToAction } from './middlewares';
 
 import appReducer from './app/appReducer';
 import settingsReducer from './settings/settingsReducer';
+import buildDetailsReducer from './BuildDetails/buildDetailsReducer';
 
 let reducers = combineReducers({
   app: appReducer,
   settings: settingsReducer,
+  buildDetails: buildDetailsReducer
 });
 
 // чтобы использовать расширение redux devtools

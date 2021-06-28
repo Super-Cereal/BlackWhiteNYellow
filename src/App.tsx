@@ -11,7 +11,7 @@ import Loader from './components/common/Loader/Loader';
 import PageNotFound from './components/common/PageNotFound/PageNotFound';
 
 // @ts-ignore
-import { appIsInitializedSS, settingsHaveSettingsSS } from './redux/storeSelectors';
+import { appSS, settingsSS } from './redux/storeSelectors';
 // @ts-ignore
 import { initializeApp } from './redux/app/appActions';
 
@@ -20,25 +20,24 @@ type connectedStore = {
   initializeApp: EffectCallback;
   haveSettings: boolean;
 };
-const App: React.FC<connectedStore> = ({
-  isInitialized,
-  initializeApp,
-  haveSettings,
-}) => {
+const App: React.FC<connectedStore> = ({ isInitialized, initializeApp, haveSettings }) => {
   React.useEffect(initializeApp, [initializeApp]);
-  if (!isInitialized) return <div className="App"><Loader /></div>;
+  if (!isInitialized)
+    return (
+      <div className="App">
+        <Loader />
+      </div>
+    );
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route
-            path="/"
-            render={() => (haveSettings ? <BuildHistoryContainer /> : <StartScreen />)}
-            exact
-          />
+          <Route path="/" render={() => (haveSettings ? <BuildHistoryContainer /> : <StartScreen />)} exact />
           <Route path="/settings" render={() => <Settings />} exact />
           <Route path="/build/:buildId" render={() => <BuildDetailsContainer />} exact />
-          <Route><PageNotFound /></Route>
+          <Route>
+            <PageNotFound />
+          </Route>
         </Switch>
       </BrowserRouter>
       <Footer />
@@ -48,8 +47,8 @@ const App: React.FC<connectedStore> = ({
 
 // @ts-ignore
 const mstp = (state) => ({
-  isInitialized: appIsInitializedSS(state),
-  haveSettings: settingsHaveSettingsSS(state),
+  isInitialized: appSS.isInitialized(state),
+  haveSettings: settingsSS.haveSettings(state),
 });
 const odtp = { initializeApp };
 
