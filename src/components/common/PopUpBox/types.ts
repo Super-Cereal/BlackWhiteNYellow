@@ -1,5 +1,5 @@
 import { FormEventHandler } from 'react';
-import { DeepMap, FieldError } from 'react-hook-form';
+import { DeepMap, FieldError, UseFormSetValue, UseFormSetFocus } from 'react-hook-form';
 
 export type formData = {
   commitHash: string;
@@ -16,6 +16,7 @@ export type popUpBoxProps = {
   register: any;
   onSubmit: FormEventHandler<HTMLFormElement>;
   errors: DeepMap<formData, FieldError>;
-  setValue: Function;
+  setValue: UseFormSetValue<formData>;
+  setFocus: UseFormSetFocus<formData>;
   isRequestInProgress: boolean;
 };

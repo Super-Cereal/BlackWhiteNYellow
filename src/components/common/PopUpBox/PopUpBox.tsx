@@ -18,6 +18,7 @@ const PopUpBox: React.FC<popUpBoxProps> = ({
   onSubmit,
   register,
   setValue,
+  setFocus,
   errors,
   isRequestInProgress,
 }) => (
@@ -36,6 +37,7 @@ const PopUpBox: React.FC<popUpBoxProps> = ({
           placeholder="Commit hash"
           validators={{ required: 'This field is required' }}
           setValue={setValue}
+          setFocus={setFocus}
           errors={errors.commitHash}
         />
       </div>
@@ -63,7 +65,7 @@ const PopUpBox: React.FC<popUpBoxProps> = ({
 
 const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({ popUpAdditionalClass, togglePopUp }) => {
   const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
-  const { register, handleSubmit, formState, setValue, setError } = useForm<formData>({
+  const { register, handleSubmit, formState, setValue, setFocus, setError } = useForm<formData>({
     mode: 'onTouched',
   });
   const history = useHistory();
@@ -84,6 +86,7 @@ const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({ popUpAdditionalCl
       onSubmit={onSubmit}
       register={register}
       setValue={setValue}
+      setFocus={setFocus}
       errors={formState.errors}
       isRequestInProgress={isRequestInProgress}
     />
