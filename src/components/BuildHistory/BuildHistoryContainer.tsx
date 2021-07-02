@@ -8,25 +8,35 @@ import { connectedStoreContainerProps } from './types';
 import { popUpBoxContainerProps } from '../common/PopUpBox/types';
 
 // @ts-ignore
-import { settingsSS } from '../../redux/storeSelectors';
+import { settingsSS, buildHistorySS } from '../../redux/storeSelectors';
 // @ts-ignore
-import { useRequestForAllBuilds } from './buildHistoryReducer';
+import { axiosGetAllBuilds, clearBuildHistoryLoadInfo } from './redux/buildHistoryActions';
 
 const BuildHistoryContainer: React.FC<popUpBoxContainerProps & connectedStoreContainerProps> = ({
   popUpAdditionalClass,
   togglePopUp,
   repoName,
+  builds,
+  loadInfo,
+  axiosGetAllBuilds,
+  clearBuildHistoryLoadInfo,
 }) => {
   const [offset, setOffset] = React.useState(0);
   const onShowMore = () => setOffset(offset + 1);
-  const allBuilds = useRequestForAllBuilds(offset);
+
+  React.useEffect(() => {
+    axiosGetAllBuilds(offset);
+  }, [offset, axiosGetAllBuilds]);
+
+  React.useEffect(() => clearBuildHistoryLoadInfo, [clearBuildHistoryLoadInfo]);
+
   return (
     <BuildHistory
       popUpAdditionalClass={popUpAdditionalClass}
       togglePopUp={togglePopUp}
       repoName={repoName}
-      builds={allBuilds.builds}
-      isFetching={allBuilds.isFetching}
+      builds={builds}
+      isFetching={loadInfo.isFetching}
       onShowMore={onShowMore}
     />
   );
@@ -35,6 +45,13 @@ const BuildHistoryContainer: React.FC<popUpBoxContainerProps & connectedStoreCon
 // @ts-ignore
 const mstp = (state) => ({
   repoName: settingsSS.repoInfo(state).repoName,
+  builds: buildHistorySS.builds(state),
+  loadInfo: buildHistorySS.loadInfo(state),
 });
 
-export default compose(connect(mstp), withTransparentBackground)(BuildHistoryContainer);
+const odtp = {
+  axiosGetAllBuilds,
+  clearBuildHistoryLoadInfo,
+};
+
+export default compose(connect(mstp, odtp), withTransparentBackground)(BuildHistoryContainer);

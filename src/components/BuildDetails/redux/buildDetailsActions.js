@@ -1,13 +1,13 @@
 import buildDetailsDAL from './buildDetailsDAL';
 
-export const SET_IS_FETCHING = 'SET_IS_FETCHING';
-export const SET_BUILD_DATA = 'SET_BUILD_DATA';
-export const SET_BUILD_LOGS = 'SET_BUILD_LOGS';
-export const NO_BUILD = 'NO_BUILD';
-export const CLEAR = 'CLEAR';
+export const SET_FETCHING = 'buildDetails_SET_FETCHING';
+export const SET_BUILD_DATA = 'buildDetails_SET_BUILD_DATA';
+export const SET_BUILD_LOGS = 'buildDetails_SET_BUILD_LOGS';
+export const NO_BUILD = 'buildDetails_NO_BUILD';
+export const CLEAR = 'buildDetails_CLEAR';
 
 export const axiosGetBuildDetails = (buildId) => async (dispatch) => {
-  dispatch({ type: SET_IS_FETCHING, payload: true });
+  dispatch({ type: SET_FETCHING, payload: true });
   const [build, logs] = await Promise.all([
     buildDetailsDAL.axiosGetBuild(buildId),
     buildDetailsDAL.axiosGetBuildLogs(buildId),
@@ -22,7 +22,7 @@ export const axiosGetBuildDetails = (buildId) => async (dispatch) => {
   } else {
     dispatch(NO_BUILD);
   }
-  dispatch({ type: SET_IS_FETCHING, payload: false });
+  dispatch({ type: SET_FETCHING, payload: false });
 };
 
 export const clearBuildDetailsLoadInfo = () => CLEAR;

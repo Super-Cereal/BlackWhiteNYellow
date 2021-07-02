@@ -9,6 +9,10 @@ export type buildHistoryProps = {
 
 export type connectedStoreContainerProps = {
   repoName: string;
+  builds: Array<buildType>;
+  loadInfo: { isFetching: boolean };
+  axiosGetAllBuilds: (offset: number) => void;
+  clearBuildHistoryLoadInfo: () => any;
 };
 
 export type popUpBoxBuildProps = {

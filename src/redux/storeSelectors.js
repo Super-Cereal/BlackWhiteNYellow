@@ -26,3 +26,8 @@ export const buildDetailsSS = {
     isFetching: state.buildDetails.isFetching,
   }),
 };
+
+export const buildHistorySS = {
+  builds: (state) => state.buildHistory.builds,
+  loadInfo: (state) => ({ isFetching: state.buildHistory.isFetching }),
+};

@@ -5,11 +5,13 @@ import { typeToAction } from './middlewares';
 import appReducer from './app/appReducer';
 import settingsReducer from '../components/Settings/redux/settingsReducer';
 import buildDetailsReducer from '../components/BuildDetails/redux/buildDetailsReducer';
+import buildHistoryReducer from './../components/BuildHistory/redux/buildHistoryReducer';
 
 let reducers = combineReducers({
   app: appReducer,
   settings: settingsReducer,
-  buildDetails: buildDetailsReducer
+  buildDetails: buildDetailsReducer,
+  buildHistory: buildHistoryReducer
 });
 
 // чтобы использовать расширение redux devtools

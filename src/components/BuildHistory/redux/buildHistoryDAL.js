@@ -1,4 +1,4 @@
-import instance from '../../axios/axiosInstance';
+import instance from '../../../axios/axiosInstance';
 
 const buildHistoryDAL = {
   async axiosGetAllBuilds(offset) {

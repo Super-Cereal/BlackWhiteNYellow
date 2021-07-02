@@ -1,4 +1,4 @@
-import { SET_IS_FETCHING, NO_BUILD, SET_BUILD_DATA, SET_BUILD_LOGS, CLEAR } from './buildDetailsActions';
+import { SET_FETCHING, NO_BUILD, SET_BUILD_DATA, SET_BUILD_LOGS, CLEAR } from './buildDetailsActions';
 
 import Convert from 'ansi-to-html';
 const convert = new Convert();
@@ -12,7 +12,7 @@ const defaultState = {
 
 function buildDetailsReducer(state = defaultState, action) {
   switch (action.type) {
-    case SET_IS_FETCHING:
+    case SET_FETCHING:
       return { ...state, isFetching: action.payload };
     case NO_BUILD:
       return { ...state, noBuild: true };
