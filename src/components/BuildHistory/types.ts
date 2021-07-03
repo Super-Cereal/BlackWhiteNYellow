@@ -14,8 +14,3 @@ export type connectedStoreContainerProps = {
   axiosGetAllBuilds: (offset: number) => void;
   clearBuildHistoryLoadInfo: () => any;
 };
-
-export type popUpBoxBuildProps = {
-  popUpAdditionalClass: string;
-  togglePopUp: React.MouseEventHandler<HTMLElement>;
-};

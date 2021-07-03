@@ -11,12 +11,12 @@ let reducers = combineReducers({
   app: appReducer,
   settings: settingsReducer,
   buildDetails: buildDetailsReducer,
-  buildHistory: buildHistoryReducer
+  buildHistory: buildHistoryReducer,
 });
 
 // чтобы использовать расширение redux devtools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-let store = createStore(reducers, composeEnhancers(applyMiddleware(typeToAction, ThunkMiddleware)));
+let initStore = () => createStore(reducers, composeEnhancers(applyMiddleware(typeToAction, ThunkMiddleware)));
 
-export default store;
+export default initStore;

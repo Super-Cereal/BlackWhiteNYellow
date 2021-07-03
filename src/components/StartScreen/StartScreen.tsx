@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import configurationImage from '../../style/images/configuration.svg';
@@ -7,16 +7,18 @@ import configurationImage from '../../style/images/configuration.svg';
 import './StartScreen.scss';
 
 const StartScreen: React.FC = () => {
-  const titleText = 'School CI server';
-  const headerType = 'StartScreen';
+  const history = useHistory();
   const buttons = (
-    <Link to="/settings" className="Button Button_withIcon Button_withIcon_settings Button_onMobile_removeText">
+    <button
+      onClick={() => history.push('/settings')}
+      className="Button Button_withIcon Button_withIcon_settings Button_onMobile_removeText"
+    >
       <span className="Button-Text">Settings</span>
-    </Link>
+    </button>
   );
   return (
     <>
-      <Header titleText={titleText} headerType={headerType} buttons={buttons} />
+      <Header titleText={'School CI server'} headerType={'StartScreen'} buttons={buttons} />
       <div className="StartScreen Page">
         <div className="StartScreen-Settings">
           <img src={configurationImage} alt="configuration" className="StartScreen-Settings-Image" />
@@ -25,9 +27,9 @@ const StartScreen: React.FC = () => {
             <br />
             and synchronization settings
           </p>{' '}
-          <Link to="/settings" className="Button Button_bigger Button_color_yellow">
+          <button onClick={() => history.push('/settings')} className="Button Button_bigger Button_color_yellow">
             Open settings
-          </Link>
+          </button>
         </div>
       </div>
     </>

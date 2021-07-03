@@ -1,20 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import BuildHistory from './BuildHistory';
-import withTransparentBackground from '../_HOC/withTransparentBackground';
 import { connectedStoreContainerProps } from './types';
-import { popUpBoxContainerProps } from '../common/PopUpBox/types';
 
 // @ts-ignore
 import { settingsSS, buildHistorySS } from '../../redux/storeSelectors';
 // @ts-ignore
 import { axiosGetAllBuilds, clearBuildHistoryLoadInfo } from './redux/buildHistoryActions';
 
-const BuildHistoryContainer: React.FC<popUpBoxContainerProps & connectedStoreContainerProps> = ({
-  popUpAdditionalClass,
-  togglePopUp,
+const BuildHistoryContainer: React.FC<connectedStoreContainerProps> = ({
   repoName,
   builds,
   loadInfo,
@@ -32,8 +27,6 @@ const BuildHistoryContainer: React.FC<popUpBoxContainerProps & connectedStoreCon
 
   return (
     <BuildHistory
-      popUpAdditionalClass={popUpAdditionalClass}
-      togglePopUp={togglePopUp}
       repoName={repoName}
       builds={builds}
       isFetching={loadInfo.isFetching}
@@ -54,4 +47,4 @@ const odtp = {
   clearBuildHistoryLoadInfo,
 };
 
-export default compose(connect(mstp, odtp), withTransparentBackground)(BuildHistoryContainer);
+export default connect(mstp, odtp)(BuildHistoryContainer);

@@ -4,15 +4,17 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 
 import './style/sass/index.scss';
-import App from './App';
+import AppContainer from './AppContainer';
 
 // @ts-ignore
-import store from './redux/store';
+import initStore from './redux/store';
 
-let renderEntireTree = () => {
+const store = initStore()
+
+const renderEntireTree = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <AppContainer />
     </Provider>,
     document.getElementById('root')
   );

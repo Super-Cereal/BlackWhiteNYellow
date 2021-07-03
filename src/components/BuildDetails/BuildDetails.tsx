@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Card from './../common/Card/Card';
@@ -9,6 +9,7 @@ import { buildProps } from './types';
 import './BuildDetails.scss';
 
 const BuildDetails: React.FC<buildProps> = ({ rebuild, repoName, build }) => {
+  const history = useHistory()
   const buttons = (
     <>
       <button
@@ -18,7 +19,7 @@ const BuildDetails: React.FC<buildProps> = ({ rebuild, repoName, build }) => {
       >
         <span className="Button-Text">Rebuild</span>
       </button>
-      <Link to="/settings" className="Button Button_withIcon Button_withIcon_settings"></Link>
+      <button onClick={() => history.push("/settings")} className="Button Button_withIcon Button_withIcon_settings"></button>
     </>
   );
   return (

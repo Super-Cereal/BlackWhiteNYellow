@@ -130,6 +130,7 @@ input::-webkit-inner-spin-button {
     }
     &-ButtonsBlock {
       flex-direction: column;
+      width: auto;
       .Button:nth-child(n + 2) {
         margin-left: 0;
         margin-top: 12px;

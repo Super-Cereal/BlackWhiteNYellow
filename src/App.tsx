@@ -1,6 +1,5 @@
 import React, { EffectCallback } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import StartScreen from './components/StartScreen/StartScreen';
 import Settings from './components/Settings/Settings';
@@ -9,11 +8,6 @@ import BuildDetailsContainer from './components/BuildDetails/BuildDetailsContain
 import Footer from './components/Footer/Footer';
 import Loader from './components/common/Loader/Loader';
 import PageNotFound from './components/common/PageNotFound/PageNotFound';
-
-// @ts-ignore
-import { appSS, settingsSS } from './redux/storeSelectors';
-// @ts-ignore
-import { initializeApp } from './redux/app/appActions';
 
 type connectedStore = {
   isInitialized: boolean;
@@ -45,11 +39,4 @@ const App: React.FC<connectedStore> = ({ isInitialized, initializeApp, haveSetti
   );
 };
 
-// @ts-ignore
-const mstp = (state) => ({
-  isInitialized: appSS.isInitialized(state),
-  haveSettings: settingsSS.haveSettings(state),
-});
-const odtp = { initializeApp };
-
-export default connect(mstp, odtp)(App);
+export default App;

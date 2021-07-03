@@ -6,12 +6,10 @@ export type formData = {
 };
 
 export type popUpBoxContainerProps = {
-  popUpAdditionalClass: string;
   togglePopUp: React.MouseEventHandler<HTMLElement>;
 };
 
 export type popUpBoxProps = {
-  popUpAdditionalClass: string;
   togglePopUp: React.MouseEventHandler<HTMLElement>;
   register: any;
   onSubmit: FormEventHandler<HTMLFormElement>;
@@ -20,3 +18,7 @@ export type popUpBoxProps = {
   setFocus: UseFormSetFocus<formData>;
   isRequestInProgress: boolean;
 };
+
+export interface usePopUpTogglerInterface {
+  (initialValue: boolean): [boolean, React.MouseEventHandler<HTMLElement>];
+}
