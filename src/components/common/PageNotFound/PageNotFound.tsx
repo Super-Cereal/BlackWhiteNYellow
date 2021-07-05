@@ -5,7 +5,7 @@ const PageNotFound: React.FC = () => (
   <>
     <Header titleText="School CI Server" headerType="Settings" />
     <div className="Page">
-      <span>404</span>
+      <span data-testid='page404'>404</span>
     </div>
   </>
 );

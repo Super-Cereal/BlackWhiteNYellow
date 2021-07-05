@@ -35,7 +35,7 @@ export const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
 
   return buildDetails.loadInfo.isFetching ? (
     <div className="Page">
-      <Loader />
+      <Loader testid="BuildDetailsLoading" />
     </div>
   ) : buildDetails.loadInfo.noBuild ? (
     <PageNotFound />

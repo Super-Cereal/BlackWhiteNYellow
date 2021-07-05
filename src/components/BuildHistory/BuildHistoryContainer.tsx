@@ -9,7 +9,7 @@ import { settingsSS, buildHistorySS } from '../../redux/storeSelectors';
 // @ts-ignore
 import { axiosGetAllBuilds, clearBuildHistoryLoadInfo } from './redux/buildHistoryActions';
 
-const BuildHistoryContainer: React.FC<connectedStoreContainerProps> = ({
+export const BuildHistoryContainer: React.FC<connectedStoreContainerProps> = ({
   repoName,
   builds,
   loadInfo,
@@ -24,15 +24,7 @@ const BuildHistoryContainer: React.FC<connectedStoreContainerProps> = ({
   }, [offset, axiosGetAllBuilds]);
 
   React.useEffect(() => clearBuildHistoryLoadInfo, [clearBuildHistoryLoadInfo]);
-
-  return (
-    <BuildHistory
-      repoName={repoName}
-      builds={builds}
-      isFetching={loadInfo.isFetching}
-      onShowMore={onShowMore}
-    />
-  );
+  return <BuildHistory repoName={repoName} builds={builds} isFetching={loadInfo.isFetching} onShowMore={onShowMore} />;
 };
 
 // @ts-ignore

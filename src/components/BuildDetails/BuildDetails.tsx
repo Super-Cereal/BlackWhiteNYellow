@@ -15,6 +15,7 @@ const BuildDetails: React.FC<buildProps> = ({ rebuild, repoName, build }) => {
       <button
         disabled={rebuild.isRebuildInProgress}
         onClick={rebuild.onRebuild}
+        data-testid="rebuildButton"
         className="Button Button_withIcon Button_withIcon_rebuild Button_onMobile_removeText"
       >
         <span className="Button-Text">Rebuild</span>

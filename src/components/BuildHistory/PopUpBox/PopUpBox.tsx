@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import FormTextField from '../../common/FormFields/FormTextField/FormTextField';
@@ -12,7 +11,7 @@ import startNewBuild from '../../../axios/startNewBuild';
 
 import './PopUpBox.scss';
 
-const PopUpBox: React.FC<popUpBoxProps> = ({
+export const PopUpBox: React.FC<popUpBoxProps> = ({
   togglePopUp,
   onSubmit,
   register,
@@ -21,7 +20,7 @@ const PopUpBox: React.FC<popUpBoxProps> = ({
   errors,
   isRequestInProgress,
 }) => (
-  <div className='PopUpBoxWrapper'>
+  <div className='PopUpBoxWrapper' data-testid='PopUpBox'>
     <div className='PopUpBox'>
       <div className="PopUpBox-Titles">
         <h2 className="PopUpBox-Titles-MainTitle fontType_subhead">New build</h2>
@@ -53,6 +52,7 @@ const PopUpBox: React.FC<popUpBoxProps> = ({
             type="button"
             disabled={isRequestInProgress}
             onClick={togglePopUp}
+            data-testid="PopUpBox-cancelButton"
             className="Button Button_bigger Button_onMobile_wider"
           >
             Cancel
@@ -61,11 +61,11 @@ const PopUpBox: React.FC<popUpBoxProps> = ({
         </div>
       </form>
     </div>
-    <span className="PopUpBox-BlackTransparentScreen" onClick={togglePopUp}></span>
+    <span className="PopUpBox-BlackTransparentScreen" data-testid='PopUpBox-BlackBackground' onClick={togglePopUp}></span>
   </div>
 );
 
-const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({ togglePopUp }) => {
+export const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({ togglePopUp }) => {
   const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
   const { register, handleSubmit, formState, setValue, setFocus, setError } = useForm<formData>({
     mode: 'onTouched',
@@ -94,4 +94,4 @@ const PopUpBoxContainer: React.FC<popUpBoxContainerProps> = ({ togglePopUp }) =>
   );
 };
 
-export default connect(null)(PopUpBoxContainer);
+export default PopUpBoxContainer;

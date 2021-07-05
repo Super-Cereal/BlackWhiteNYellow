@@ -34,7 +34,6 @@ describe('BuildDetails axiosGetBuildDetails', () => {
     setBuildData.mockClear();
     setBuildLogs.mockClear();
     noBuild.mockClear();
-    dispatchStub.mockClear();
   });
   it('происходят запросы к апи с переданным buildId', async () => {
     const buildId = 1;

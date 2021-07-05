@@ -16,7 +16,7 @@ const BuildHistory: React.FC<buildHistoryProps> = ({ repoName, builds, onShowMor
   const [popUpIsShown, togglePopUp] = usePopUpToggler(false);
   const history = useHistory();
   const cards = builds.map((v) => (
-    <Link to={`/build/${v.id}`} key={v.id}>
+    <Link data-testid="linkToBuildDetails" to={`/build/${v.id}`} key={v.id}>
       <Card
         status={v.status}
         buildNumber={v.buildNumber}
@@ -31,7 +31,7 @@ const BuildHistory: React.FC<buildHistoryProps> = ({ repoName, builds, onShowMor
   ));
   const buttons = (
     <>
-      <button onClick={togglePopUp} className="Button Button_withIcon Button_withIcon_run Button_onMobile_removeText">
+      <button data-testid='BuildHistory-runBuildButton' onClick={togglePopUp} className="Button Button_withIcon Button_withIcon_run Button_onMobile_removeText">
         <span className="Button-Text">Run Build</span>
       </button>
       <button
@@ -49,7 +49,7 @@ const BuildHistory: React.FC<buildHistoryProps> = ({ repoName, builds, onShowMor
           {cards}
           {isFetching && <Loader />}
         </div>
-        <button onClick={onShowMore} className="BuildHistory-Button Button Button_onMobile_wider">
+        <button data-testid="showMoreButton" onClick={onShowMore} className="BuildHistory-Button Button Button_onMobile_wider">
           <span className="Button-Text">Show more</span>
         </button>
       </div>
