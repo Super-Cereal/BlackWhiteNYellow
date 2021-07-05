@@ -1,7 +1,7 @@
-import { axiosGetBuildDetailsCreator } from './buildDetailsActions';
+import { axiosGetBuildDetailsCreator, axiosStartNewBuildCreator } from './buildDetailsActions';
 import '@testing-library/jest-dom/extend-expect';
 
-describe('testing BuildDetails redux actions', () => {
+describe('BuildDetails axiosGetBuildDetails', () => {
   const dumbBuildData = {
     buildNumber: 1,
     status: 'Success',
@@ -110,5 +110,24 @@ describe('testing BuildDetails redux actions', () => {
     })(1);
     await axiosGetBuildDetails(dispatchStub);
     expect(setBuildLogs).toHaveBeenCalledWith('its correct build logs');
+  });
+});
+
+describe('BuildDetails axiosStartNewBuild', () => {
+  const buildDetailsDAL = { axiosStartNewBuild: jest.fn() };
+  const setRebuilding = jest.fn();
+  const dispatchStub = jest.fn();
+  afterEach(() => {
+    setRebuilding.mockClear();
+  });
+  it('происходит запрос к апи с переданным commitHash', async () => {
+    const commitHash = 'e123xas';
+    buildDetailsDAL.axiosStartNewBuild.mockReturnValue({ status: 200, build: {} });
+    const axiosStartNewBuild = axiosStartNewBuildCreator({
+      buildDetailsDAL,
+      setRebuilding,
+    })(commitHash);
+    await axiosStartNewBuild(dispatchStub);
+    expect(buildDetailsDAL.axiosStartNewBuild).toHaveBeenCalledWith(commitHash);
   });
 });

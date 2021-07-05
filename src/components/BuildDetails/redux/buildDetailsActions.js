@@ -48,7 +48,8 @@ export const axiosStartNewBuildCreator =
   (commitHash) =>
   async (dispatch) => {
     dispatch(setRebuilding(true));
-    const { status, data: build } = await buildDetailsDAL.axiosStartNewBuild(commitHash);
+    const resp = await buildDetailsDAL.axiosStartNewBuild(commitHash);
+    const { status, data: build } = resp;
     dispatch(setRebuilding(false));
     return { status, build };
   };
