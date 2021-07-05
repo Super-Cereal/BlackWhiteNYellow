@@ -6,8 +6,8 @@ export type buildType = {
   commitHash: string;
   authorName: string;
   logsText: string;
-  start: string;
-  duration: number;
+  start?: string;
+  duration?: number;
   id: string;
 };
 
@@ -20,6 +20,8 @@ export type connectedStoreContainerProps = {
       isFetching: boolean;
     };
   };
+  isRebuilding: boolean;
+  axiosStartNewBuild: (commitHash: string) => { status: number; build: buildType };
   axiosGetBuildDetails: (buildId: string) => void;
   clearBuildDetailsLoadInfo: () => any;
 };

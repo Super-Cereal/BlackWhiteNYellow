@@ -9,15 +9,15 @@ import PageNotFound from '../common/PageNotFound/PageNotFound';
 // @ts-ignore
 import { settingsSS, buildDetailsSS } from '../../redux/storeSelectors';
 // @ts-ignore
-import { axiosGetBuildDetails, clearBuildDetailsLoadInfo } from './redux/buildDetailsActions';
-// @ts-ignore
-import startNewBuild from '../../axios/startNewBuild';
+import { axiosGetBuildDetails, clearBuildDetailsLoadInfo, axiosStartNewBuild } from './redux/buildDetailsActions';
 
 import { connectedStoreContainerProps, useParamsType } from './types';
 
-const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
+export const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
   repoName,
   buildDetails,
+  isRebuilding,
+  axiosStartNewBuild,
   axiosGetBuildDetails,
   clearBuildDetailsLoadInfo,
 }) => {
@@ -26,13 +26,10 @@ const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
     axiosGetBuildDetails(buildId);
     return clearBuildDetailsLoadInfo;
   }, [buildId, axiosGetBuildDetails, clearBuildDetailsLoadInfo]);
-
+  
   const history = useHistory();
-  const [isRebuildInProgress, setIsRebuildInProgress] = React.useState(false);
   const onRebuild = async () => {
-    setIsRebuildInProgress(true);
-    const { status, data: build } = await startNewBuild(buildDetails.build.commitHash);
-    setIsRebuildInProgress(false);
+    const { status, build } = await axiosStartNewBuild(buildDetails.build.commitHash);
     if (status === 200) history.push(`/build/${build.id}`);
   };
 
@@ -43,7 +40,11 @@ const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
   ) : buildDetails.loadInfo.noBuild ? (
     <PageNotFound />
   ) : (
-    <BuildDetails rebuild={{ onRebuild, isRebuildInProgress }} repoName={repoName} build={buildDetails.build} />
+    <BuildDetails
+      rebuild={{ onRebuild, isRebuildInProgress: isRebuilding }}
+      repoName={repoName}
+      build={buildDetails.build}
+    />
   );
 };
 
@@ -51,9 +52,11 @@ const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
 const mstp = (state) => ({
   repoName: settingsSS.repoInfo(state).repoName,
   buildDetails: { build: buildDetailsSS.buildInfo(state), loadInfo: buildDetailsSS.loadInfo(state) },
+  isRebuilding: buildDetailsSS.isRebuilding(state),
 });
 
 const odtp = {
+  axiosStartNewBuild,
   axiosGetBuildDetails,
   clearBuildDetailsLoadInfo,
 };

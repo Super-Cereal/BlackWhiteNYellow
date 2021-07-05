@@ -5,7 +5,7 @@ export type CardProps = {
   commitBranch: string;
   commitHash: string;
   commitAuthor: string;
-  date: string;
-  period: number;
+  date?: string;
+  period?: number;
   isStatic?: boolean;
 };

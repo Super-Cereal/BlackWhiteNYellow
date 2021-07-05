@@ -12,6 +12,7 @@ const StartScreen: React.FC = () => {
     <button
       onClick={() => history.push('/settings')}
       className="Button Button_withIcon Button_withIcon_settings Button_onMobile_removeText"
+      data-testid="StartScreen-HeaderLinkToSettings"
     >
       <span className="Button-Text">Settings</span>
     </button>
@@ -19,15 +20,19 @@ const StartScreen: React.FC = () => {
   return (
     <>
       <Header titleText={'School CI server'} headerType={'StartScreen'} buttons={buttons} />
-      <div className="StartScreen Page">
+      <div className="StartScreen Page" data-testid="StartScreen">
         <div className="StartScreen-Settings">
           <img src={configurationImage} alt="configuration" className="StartScreen-Settings-Image" />
           <p className="StartScreen-Settings-Text">
             Configure repository connection
             <br />
             and synchronization settings
-          </p>{' '}
-          <button onClick={() => history.push('/settings')} className="Button Button_bigger Button_color_yellow">
+          </p>
+          <button
+            data-testid="StartScreen-CentralLintToSettings"
+            onClick={() => history.push('/settings')}
+            className="Button Button_bigger Button_color_yellow"
+          >
             Open settings
           </button>
         </div>

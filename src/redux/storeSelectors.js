@@ -25,6 +25,7 @@ export const buildDetailsSS = {
     noBuild: state.buildDetails.noBuild,
     isFetching: state.buildDetails.isFetching,
   }),
+  isRebuilding: (state) => state.buildDetails.isRebuilding,
 };
 
 export const buildHistorySS = {

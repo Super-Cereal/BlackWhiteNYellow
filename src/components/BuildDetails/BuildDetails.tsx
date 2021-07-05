@@ -9,7 +9,7 @@ import { buildProps } from './types';
 import './BuildDetails.scss';
 
 const BuildDetails: React.FC<buildProps> = ({ rebuild, repoName, build }) => {
-  const history = useHistory()
+  const history = useHistory();
   const buttons = (
     <>
       <button
@@ -19,7 +19,11 @@ const BuildDetails: React.FC<buildProps> = ({ rebuild, repoName, build }) => {
       >
         <span className="Button-Text">Rebuild</span>
       </button>
-      <button onClick={() => history.push("/settings")} className="Button Button_withIcon Button_withIcon_settings"></button>
+      <button
+        data-testid="BuildDetails-HeaderLinkToSettings"
+        onClick={() => history.push('/settings')}
+        className="Button Button_withIcon Button_withIcon_settings"
+      ></button>
     </>
   );
   return (

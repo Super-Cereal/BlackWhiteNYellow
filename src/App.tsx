@@ -1,5 +1,5 @@
 import React, { EffectCallback } from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import StartScreen from './components/StartScreen/StartScreen';
 import Settings from './components/Settings/Settings';
@@ -19,21 +19,19 @@ const App: React.FC<connectedStore> = ({ isInitialized, initializeApp, haveSetti
   if (!isInitialized)
     return (
       <div className="App">
-        <Loader />
+        <Loader testid="AppNotInitLoader" />
       </div>
     );
   return (
     <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" render={() => (haveSettings ? <BuildHistoryContainer /> : <StartScreen />)} exact />
-          <Route path="/settings" render={() => <Settings />} exact />
-          <Route path="/build/:buildId" render={() => <BuildDetailsContainer />} exact />
-          <Route>
-            <PageNotFound />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route path="/" render={() => (haveSettings ? <BuildHistoryContainer /> : <StartScreen />)} exact />
+        <Route path="/settings" render={() => <Settings />} exact />
+        <Route path="/build/:buildId" render={() => <BuildDetailsContainer />} exact />
+        <Route>
+          <PageNotFound />
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );

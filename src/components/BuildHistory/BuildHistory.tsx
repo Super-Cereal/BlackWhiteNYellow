@@ -44,7 +44,7 @@ const BuildHistory: React.FC<buildHistoryProps> = ({ repoName, builds, onShowMor
     <>
       {popUpIsShown && <PopUpBoxContainer togglePopUp={togglePopUp} />}
       <Header titleText={repoName} headerType={'BuildHistory'} buttons={buttons} />
-      <div className="BuildHistory Page">
+      <div className="BuildHistory Page" data-testid="BuildHistory">
         <div className="BuildHistory-Cards">
           {cards}
           {isFetching && <Loader />}
