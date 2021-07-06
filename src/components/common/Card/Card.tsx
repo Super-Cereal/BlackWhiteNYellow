@@ -32,8 +32,8 @@ const Card: React.FC<CardProps> = ({
     seconds = Math.floor(period / 1000) % 60;
     if (hours && minutes) periodOfBuild += `${hours} hour, ${minutes} min`;
     else if (hours && !minutes) periodOfBuild += `${hours} hour`;
-    else if (!hours && minutes) periodOfBuild += `${minutes} min, `;
-    if (!hours) periodOfBuild += `${seconds} sec`;
+    else if (!hours && minutes) periodOfBuild += `${minutes} min, ${seconds} sec`;
+    else periodOfBuild += `${seconds} sec`;
   }
   return (
     <div className={`Card Card_${status.toLowerCase()} Card_static_${isStatic}`}>
@@ -54,8 +54,8 @@ const Card: React.FC<CardProps> = ({
       </div>
       {date && period && (
         <div className="Card-DateInfo">
-          <div className="Card-DateInfo-Date">{`${day} ${months[Number(month) - 1]}, ${time}`}</div>
-          <div className="Card-DateInfo-Period">{periodOfBuild}</div>
+          <div className="Card-DateInfo-Date" data-testid="CardDate">{`${day} ${months[Number(month) - 1]}, ${time}`}</div>
+          <div className="Card-DateInfo-Period" data-testid="CardPeriod">{periodOfBuild}</div>
         </div>
       )}
     </div>
