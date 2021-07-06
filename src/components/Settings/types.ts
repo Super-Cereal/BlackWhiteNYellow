@@ -21,3 +21,13 @@ export type settingsFormProps = {
   };
   isRequestInProgress: boolean;
 };
+
+export type settingsFormConnectedStore = {
+  axiosPostSettings: any;
+  repoInfo: {
+    repoName: string;
+    mainBranch: string;
+    buildCommand: string;
+    period: number;
+  };
+};

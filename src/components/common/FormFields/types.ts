@@ -10,6 +10,7 @@ export interface useFormFieldInterface {
   };
 }
 export type FieldProps = {
+  testid?: string;
   label?: string;
   name: string;
   register: Function;

@@ -13,6 +13,7 @@ const FormTextField: React.FC<FieldProps> = ({
   placeholder = '',
   setValue,
   setFocus,
+  testid,
 }) => {
   const onClickHandler = () => {
     setValue(name, '', { shouldValidate: true });
@@ -26,6 +27,7 @@ const FormTextField: React.FC<FieldProps> = ({
           className={`Form-InputBlock-Label Form-InputBlock_text-Label ${
             validators.required && 'Form-InputBlock-Label_required'
           }`}
+          
         >
           {label}
         </label>
@@ -37,8 +39,9 @@ const FormTextField: React.FC<FieldProps> = ({
           {...register(name, validators)}
           placeholder={placeholder}
           type="text"
+          data-testid={testid}
         />
-        <span className="Form-InputBlock_text-CancelInput" onClick={onClickHandler}>
+        <span data-testid={`${testid}-clearButton`}className="Form-InputBlock_text-CancelInput" onClick={onClickHandler}>
           &#xe90a;
         </span>
       </div>

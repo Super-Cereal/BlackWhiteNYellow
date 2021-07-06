@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import FormTextField from '../common/FormFields/FormTextField/FormTextField';
 import FormNumberField from '../common/FormFields/FormNumberField/FormNumberField';
 import Loader from '../common/Loader/Loader';
-import { settingsFormProps, formData } from './types';
+import { settingsFormProps, formData, settingsFormConnectedStore } from './types';
 
 // @ts-ignore
 import settingsDAL from './redux/settingsDAL';
@@ -16,7 +16,7 @@ import { axiosPostSettings } from './redux/settingsActions';
 // @ts-ignore
 import { settingsSS } from '../../redux/storeSelectors';
 
-const SettingsForm: React.FC<settingsFormProps> = ({
+export const SettingsForm: React.FC<settingsFormProps> = ({
   register,
   onSubmit,
   onClickRedirect,
@@ -29,6 +29,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
   <form onSubmit={onSubmit} className="Settings-Form Form">
     <div className="Settings-Form-Inputs Form-Inputs">
       <FormTextField
+        testid="formRepoName"
         register={register}
         name="repoName"
         errors={errors.repoName}
@@ -45,6 +46,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
         setFocus={setFocus}
       />
       <FormTextField
+        testid="formBuildCommand"
         register={register}
         name="buildCommand"
         errors={errors.buildCommand}
@@ -57,6 +59,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
         placeholder="Build command"
       />
       <FormTextField
+        testid="formMainBranch"
         register={register}
         name="mainBranch"
         errors={errors.mainBranch}
@@ -72,6 +75,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
         placeholder="master"
       />
       <FormNumberField
+        testid="formPeriod"
         register={register}
         name="period"
         errors={errors.period}
@@ -112,16 +116,7 @@ const SettingsForm: React.FC<settingsFormProps> = ({
   </form>
 );
 
-type connectedStore = {
-  axiosPostSettings: any;
-  repoInfo: {
-    repoName: string;
-    mainBranch: string;
-    buildCommand: string;
-    period: number;
-  };
-};
-const SettingsFormContainer: React.FC<connectedStore> = ({ axiosPostSettings, repoInfo }) => {
+export const SettingsFormContainer: React.FC<settingsFormConnectedStore> = ({ axiosPostSettings, repoInfo }) => {
   const { register, handleSubmit, setError, formState, setValue, setFocus } = useForm<formData>({
     mode: 'onTouched',
     defaultValues: {

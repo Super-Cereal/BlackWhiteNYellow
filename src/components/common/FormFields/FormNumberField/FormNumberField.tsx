@@ -4,7 +4,7 @@ import { FieldProps } from '../types';
 
 import '../Form.scss';
 
-const FormNumberField: React.FC<FieldProps> = ({ label, name, register, value = '', errors, validators }) => {
+const FormNumberField: React.FC<FieldProps> = ({ label, name, register, value = '', errors, validators, testid }) => {
   return (
     <div className="Form-InputBlock Form-InputBlock_number">
       <div className="Form-InputBlock-InputBox">
@@ -21,6 +21,7 @@ const FormNumberField: React.FC<FieldProps> = ({ label, name, register, value = 
             errors && 'Form-InputBlock-Input_withError'
           }`}
           type="number"
+          data-testid={testid}
         />
         <label className="Form-InputBlock-Label Form-InputBlock_number-Label_value" htmlFor={name}>
           {value}
