@@ -15,6 +15,8 @@ import settingsDAL from './redux/settingsDAL';
 import { axiosPostSettings } from './redux/settingsActions';
 // @ts-ignore
 import { settingsSS } from '../../redux/storeSelectors';
+// @ts-ignore
+import grabMetrics from '../../metrics/grabMetrics';
 
 export const SettingsForm: React.FC<settingsFormProps> = ({
   register,
@@ -117,6 +119,7 @@ export const SettingsForm: React.FC<settingsFormProps> = ({
 );
 
 export const SettingsFormContainer: React.FC<settingsFormConnectedStore> = ({ axiosPostSettings, repoInfo }) => {
+  React.useEffect(() => grabMetrics('settings'), []);
   const { register, handleSubmit, setError, formState, setValue, setFocus } = useForm<formData>({
     mode: 'onTouched',
     defaultValues: {

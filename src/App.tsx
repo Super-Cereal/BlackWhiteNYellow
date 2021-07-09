@@ -8,6 +8,8 @@ import BuildDetailsContainer from './components/BuildDetails/BuildDetailsContain
 import Footer from './components/Footer/Footer';
 import Loader from './components/common/Loader/Loader';
 import PageNotFound from './components/common/PageNotFound/PageNotFound';
+// @ts-ignore
+import MetricsPage from './components/metricsPage/MetricsPage';
 
 type connectedStore = {
   isInitialized: boolean;
@@ -22,12 +24,14 @@ const App: React.FC<connectedStore> = ({ isInitialized, initializeApp, haveSetti
         <Loader testid="AppNotInitLoader" />
       </div>
     );
+
   return (
     <div className="App">
       <Switch>
         <Route path="/" render={() => (haveSettings ? <BuildHistoryContainer /> : <StartScreen />)} exact />
         <Route path="/settings" render={() => <Settings />} exact />
         <Route path="/build/:buildId" render={() => <BuildDetailsContainer />} exact />
+        <Route path="/service/metrics" render={() => <MetricsPage />} exact />
         <Route>
           <PageNotFound />
         </Route>

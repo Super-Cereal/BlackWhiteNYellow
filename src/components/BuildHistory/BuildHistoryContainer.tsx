@@ -8,6 +8,8 @@ import { connectedStoreContainerProps } from './types';
 import { settingsSS, buildHistorySS } from '../../redux/storeSelectors';
 // @ts-ignore
 import { axiosGetAllBuilds, clearBuildHistoryLoadInfo } from './redux/buildHistoryActions';
+// @ts-ignore
+import grabMetrics from './../../metrics/grabMetrics';
 
 export const BuildHistoryContainer: React.FC<connectedStoreContainerProps> = ({
   repoName,
@@ -16,6 +18,8 @@ export const BuildHistoryContainer: React.FC<connectedStoreContainerProps> = ({
   axiosGetAllBuilds,
   clearBuildHistoryLoadInfo,
 }) => {
+  React.useEffect(() => grabMetrics('build history'), []);
+
   const [offset, setOffset] = React.useState(0);
   const onShowMore = () => setOffset(offset + 1);
 

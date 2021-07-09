@@ -4,9 +4,14 @@ import { useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
 import configurationImage from '../../style/images/configuration.svg';
 
+// @ts-ignore
+import grabMetrics from '../../metrics/grabMetrics';
+
 import './StartScreen.scss';
 
 const StartScreen: React.FC = () => {
+  React.useEffect(() => grabMetrics('start screen'), []);
+
   const history = useHistory();
   const buttons = (
     <button

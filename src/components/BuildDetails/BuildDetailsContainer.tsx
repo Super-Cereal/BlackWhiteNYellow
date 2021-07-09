@@ -13,6 +13,9 @@ import { axiosGetBuildDetails, clearBuildDetailsLoadInfo, axiosStartNewBuild } f
 
 import { connectedStoreContainerProps, useParamsType } from './types';
 
+// @ts-ignore
+import grabMetrics from './../../metrics/grabMetrics';
+
 export const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
   repoName,
   buildDetails,
@@ -21,12 +24,14 @@ export const BuildDetailsContainer: React.FC<connectedStoreContainerProps> = ({
   axiosGetBuildDetails,
   clearBuildDetailsLoadInfo,
 }) => {
+  React.useEffect(() => grabMetrics('build details'), []);
+
   const { buildId } = useParams<useParamsType>();
   React.useEffect(() => {
     axiosGetBuildDetails(buildId);
     return clearBuildDetailsLoadInfo;
   }, [buildId, axiosGetBuildDetails, clearBuildDetailsLoadInfo]);
-  
+
   const history = useHistory();
   const onRebuild = async () => {
     const { status, build } = await axiosStartNewBuild(buildDetails.build.commitHash);
