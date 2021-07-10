@@ -1,6 +1,6 @@
 import Counter from './send';
 
-const grabMetrics = (pageName = 'send test') => {
+export function grabMetrics(pageName = 'send test') {
   console.log('grabbed ' + pageName);
 
   let counter = new Counter();
@@ -11,12 +11,17 @@ const grabMetrics = (pageName = 'send test') => {
     platform: 'touch',
   });
 
-  getNavigationTiming(counter);
+  sendNavigationTiming(counter);
 
-  getNavigatorInfo(counter);
-};
+  sendNavigatorInfo(counter);
 
-const getNavigationTiming = (counter) => {
+  return {
+    counter,
+    clearWatchers: () => {},
+  };
+}
+
+const sendNavigationTiming = (counter) => {
   const n = performance.getEntriesByType('navigation')[0];
   const responseStart = n.responseStart;
   const responseEnd = n.responseEnd;
@@ -36,9 +41,15 @@ const getNavigationTiming = (counter) => {
   counter.send('headerSize', n.transferSize - n.encodedBodySize || 0);
 };
 
-const getNavigatorInfo = (counter) => {
+const sendNavigatorInfo = (counter) => {
   counter.send('deviceMemory', navigator.deviceMemory || 0);
   counter.send('hardwareConcurrency', navigator.hardwareConcurrency || 0);
+
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  counter.send('mobileDevices', Number(isMobile));
+  const isTouchAvailable =
+    'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+  counter.send('touchDevices', Number(isTouchAvailable));
 };
 
 export default grabMetrics;

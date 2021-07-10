@@ -10,6 +10,8 @@ import Loader from './components/common/Loader/Loader';
 import PageNotFound from './components/common/PageNotFound/PageNotFound';
 // @ts-ignore
 import MetricsPage from './components/metricsPage/MetricsPage';
+// @ts-ignore
+import grabAppMetrics from './metrics/grabAppMetrics';
 
 type connectedStore = {
   isInitialized: boolean;
@@ -18,6 +20,10 @@ type connectedStore = {
 };
 const App: React.FC<connectedStore> = ({ isInitialized, initializeApp, haveSettings }) => {
   React.useEffect(initializeApp, [initializeApp]);
+  React.useEffect(() => {
+    const { clearWatchers } = grabAppMetrics();
+    return clearWatchers;
+  }, []);
   if (!isInitialized)
     return (
       <div className="App">

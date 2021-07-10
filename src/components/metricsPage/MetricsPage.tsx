@@ -9,7 +9,7 @@ import getStats from '../../metrics/stats';
 import './MetricsPage.scss';
 
 const MetricsPage: React.FC = () => {
-  const pageNames = ['start screen', 'settings', 'build history', 'build details'];
+  const pageNames = ['full app', 'start screen', 'settings', 'build history', 'build details'];
   const [curPage, setCurPage] = React.useState<string>(pageNames[0]);
   const choosePageSpans = pageNames.map((name) => (
     <span
@@ -51,16 +51,15 @@ const MetricsPage: React.FC = () => {
   return (
     <>
       <Header titleText={'School CI server Metrics'} headerType={'StartScreen'} buttons={buttons} />
-      {isFetching ? (
-        <div className="Page">
+
+      <div className="MetricsPage Page">
+        <div className="MetricsPage-AvailablePages">{choosePageSpans}</div>
+        {isFetching ? (
           <Loader />
-        </div>
-      ) : (
-        <div className="MetricsPage Page">
-          <div className="MetricsPage-AvailablePages">{choosePageSpans}</div>
+        ) : (
           <pre className="MetricsPage-Metrics" dangerouslySetInnerHTML={{ __html: allMetrics }}></pre>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };
